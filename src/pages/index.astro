@@ -1,11 +1,22 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroEditorial from "../components/home/HeroEditorial.astro";
+import AgendaPreview from "../components/home/AgendaPreview.astro";
+import PersonaDestacada from "../components/home/PersonaDestacada.astro";
 import ActivityGrid from "../components/grid/ActivityGrid.astro";
+import ContactBlock from "../components/home/ContactBlock.astro";
 import { content } from "../data/mock/content";
 ---
 
 <BaseLayout>
-  <section class="p-10">
+  <HeroEditorial />
+  <AgendaPreview />
+  <PersonaDestacada />
+
+  <section class="p-10 max-w-6xl">
+    <h2 class="font-heading text-4xl mb-6">Archivo Vivo</h2>
     <ActivityGrid items={content} />
   </section>
+
+  <ContactBlock />
 </BaseLayout>

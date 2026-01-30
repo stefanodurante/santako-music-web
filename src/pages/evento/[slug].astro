@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Tag from "../../components/ui/Tag.astro";
 import { content } from "../../data/mock/content";
 
 export function getStaticPaths() {
@@ -16,9 +17,7 @@ const event = content.find(
   (item) => item.type === "EVENTO" && item.data.slug === slug,
 );
 
-if (!event) {
-  throw new Error("Evento no encontrado");
-}
+if (!event) throw new Error("Evento no encontrado");
 
 const related = content.filter((item) =>
   event.data.related.includes(item.data.slug),
@@ -26,17 +25,32 @@ const related = content.filter((item) =>
 ---
 
 <BaseLayout title={event.data.title}>
-  <article class="p-10 max-w-4xl">
-    <h1 class="font-heading text-5xl mb-4">
-      {event.data.title}
-    </h1>
+  <!-- HERO -->
+  <header class="relative h-[60vh] min-h-[420px]">
+    <img
+      src={event.data.image}
+      alt={event.data.title}
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-black/50"></div>
 
-    {event.data.date && <p class="opacity-70 mb-10">{event.data.date}</p>}
+    <div class="relative h-full flex items-end p-10 text-white max-w-6xl">
+      <div>
+        <Tag label="Evento" variant="event" />
+        <h1 class="font-heading text-5xl mt-4">
+          {event.data.title}
+        </h1>
+        {event.data.date && <p class="opacity-80 mt-2">{event.data.date}</p>}
+      </div>
+    </div>
+  </header>
 
+  <!-- CONTENIDO -->
+  <main class="p-10 max-w-3xl">
     <section>
-      <h2 class="font-heading text-2xl mb-4">Personas relacionadas</h2>
+      <h2 class="font-heading text-2xl mb-4">Artistas participantes</h2>
 
-      <ul class="space-y-2">
+      <ul class="space-y-3">
         {
           related.map((item) => (
             <li>
@@ -48,5 +62,5 @@ const related = content.filter((item) =>
         }
       </ul>
     </section>
-  </article>
+  </main>
 </BaseLayout>

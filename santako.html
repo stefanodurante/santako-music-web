@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santako Music | Plataforma Cultural</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sk-white': '#F6F6F4',
+                        'sk-black': '#0E0E10',
+                        'sk-magenta': '#C61C6F',
+                        'sk-orange': '#F05A28',
+                        'sk-acid': '#9BFF00',
+                        'sk-asphalt': '#1C1C1E',
+                    },
+                    fontFamily: {
+                        serif: ['Fraunces', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #F6F6F4; color: #0E0E10; }
+        .grid-asymmetric {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <nav class="flex justify-between items-center px-6 py-8 border-b border-sk-black/10">
+        <div class="text-2xl font-serif font-black tracking-tighter uppercase">
+            Santako<span class="italic font-light">Music</span>
+        </div>
+        <div class="hidden md:flex gap-8 font-mono text-xs uppercase tracking-widest">
+            <a href="#" class="hover:text-sk-orange transition-colors">Agenda</a>
+            <a href="#" class="hover:text-sk-magenta transition-colors">Personas</a>
+            <a href="#" class="hover:text-sk-asphalt transition-colors">Podcast</a>
+            <a href="#" class="text-sk-orange font-bold underline underline-offset-4 italic">Booking</a>
+        </div>
+        <button class="md:hidden">MENU</button>
+    </nav>
+
+    <section class="px-6 py-20 md:py-32 max-w-7xl mx-auto">
+        <div class="flex items-center gap-3 mb-10">
+            <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sk-acid opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-sk-acid"></span>
+            </span>
+            <span class="font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase text-sk-black/60">
+                Live Now: Santako Vibes Radio — 102.4 FM
+            </span>
+        </div>
+
+        <h1 class="font-serif text-6xl md:text-[10rem] leading-[0.85] tracking-tighter mb-12">
+            Archivo <span class="italic font-light">vivo</span> <br>
+            & cultura <span class="text-sk-orange">urbana.</span>
+        </h1>
+
+        <div class="flex flex-col md:flex-row justify-between items-end gap-8">
+            <p class="max-w-md text-xl md:text-2xl font-light leading-snug">
+                Dignificando la memoria musical de Santa Coloma a través de un archivo editorial y una agenda en constante movimiento.
+            </p>
+            <div class="flex flex-col items-end">
+                <span class="font-mono text-xs uppercase mb-2">Próxima cita</span>
+                <span class="font-serif text-3xl italic">Jam Session Can Sisteré</span>
+                <span class="text-sk-orange font-bold uppercase tracking-widest text-sm mt-1">15 MAR — 20:00h</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="px-6 pb-24 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+            <article class="md:col-span-8 group relative overflow-hidden bg-sk-black aspect-[4/3] md:aspect-[16/9]">
+                <img src="https://images.unsplash.com/photo-1574391881207-b8ab035782c5?auto=format&fit=crop&q=80&w=1200"
+                     class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000"
+                     alt="Live Concert">
+                <div class="absolute top-6 left-6">
+                    <span class="bg-sk-orange text-white px-4 py-1.5 text-[10px] font-mono uppercase tracking-widest">
+                        Evento Especial
+                    </span>
+                </div>
+                <div class="absolute bottom-10 left-10 right-10">
+                    <h3 class="text-sk-white text-5xl md:text-7xl font-serif leading-none mb-4">Raps de la Koma</h3>
+                    <p class="text-sk-white/70 font-mono text-sm uppercase tracking-widest">24 de Abril — Teatre Sagarra</p>
+                </div>
+            </article>
+
+            <article class="md:col-span-4 group relative overflow-hidden bg-sk-magenta aspect-square">
+                <img src="https://images.unsplash.com/photo-1520182205149-1e5e4e7329b4?auto=format&fit=crop&q=80&w=800"
+                     class="absolute inset-0 w-full h-full object-cover grayscale mix-blend-multiply opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                     alt="Artist">
+                <div class="absolute top-6 left-6">
+                    <span class="bg-sk-white text-sk-magenta px-4 py-1.5 text-[10px] font-mono uppercase tracking-widest">
+                        Artista
+                    </span>
+                </div>
+                <div class="absolute bottom-8 left-8">
+                    <h3 class="text-sk-white text-4xl font-serif italic mb-1">Lia Kali</h3>
+                    <p class="text-sk-white/70 text-xs font-mono uppercase tracking-widest">Neo-Soul / Rap</p>
+                </div>
+            </article>
+
+            <article class="md:col-span-5 group relative overflow-hidden bg-sk-asphalt aspect-[4/5]">
+                <div class="p-10 h-full flex flex-col justify-between">
+                    <div class="flex justify-between items-start">
+                        <span class="bg-sk-white/10 text-sk-white px-4 py-1.5 text-[10px] font-mono uppercase tracking-widest">
+                            Podcast #12
+                        </span>
+                        <div class="w-12 h-12 border border-sk-white/20 rounded-full flex items-center justify-center">
+                            <div class="w-0 h-0 border-t-[6px] border-t-transparent border-l-[10px] border-l-sk-acid border-b-[6px] border-b-transparent ml-1"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-sk-white text-4xl font-serif leading-tight mb-4">La evolución del Drill en el extrarradio</h3>
+                        <p class="text-sk-white/50 text-sm font-light leading-relaxed mb-6">Invitado: Marc X. Una charla sobre identidad, barrio y nuevos ritmos urbanos.</p>
+                        <a href="#" class="text-sk-acid font-mono text-xs uppercase tracking-[0.2em] border-b border-sk-acid pb-1">Escuchar ahora</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="md:col-span-7 group relative overflow-hidden bg-sk-black aspect-square md:aspect-auto">
+                <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=1200"
+                     class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-110 transition-transform duration-[2s]"
+                     alt="DJ">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-center">
+                        <span class="bg-sk-acid text-sk-black px-4 py-1.5 text-[10px] font-mono uppercase tracking-widest mb-4 inline-block">HOY</span>
+                        <h3 class="text-sk-white text-5xl md:text-8xl font-serif italic">Club Night</h3>
+                        <p class="text-sk-white font-mono text-xs uppercase tracking-[0.4em] mt-4">Doors open 23:00</p>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <footer class="bg-sk-black text-sk-white px-6 py-20 border-t border-sk-white/10">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">
+            <div>
+                <h2 class="font-serif text-5xl italic mb-8">¿Quieres programar Santako Music?</h2>
+                <p class="text-sk-white/60 text-lg mb-10 max-w-sm font-light">Dossier disponible para asociaciones, programadores y espacios culturales.</p>
+                <a href="#" class="inline-block bg-sk-orange px-8 py-4 font-mono text-xs uppercase tracking-widest hover:bg-sk-white hover:text-sk-black transition-all">Descargar Dossier</a>
+            </div>
+            <div class="flex flex-col justify-between items-end border-l border-sk-white/10 pl-20">
+                <div class="text-right">
+                    <p class="font-mono text-[10px] uppercase tracking-widest text-sk-white/40 mb-4">Contacto</p>
+                    <p class="text-2xl font-serif">hola@santakomusic.com</p>
+                </div>
+                <div class="text-right mt-12">
+                    <p class="font-serif text-3xl tracking-tighter">SANTA COLOMA <br> <span class="italic text-sk-magenta">DE GRAMENET</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

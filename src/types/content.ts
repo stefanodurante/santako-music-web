@@ -14,6 +14,10 @@ export interface ContentNode {
     bio?: string;
     image?: string;
     isLive?: boolean;
+    genres?: string[];
+    members?: string[];
+    instagram?: string;
+    youtube?: string;
     related: string[];
   };
-} // Content type definitions
+}
