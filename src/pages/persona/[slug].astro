@@ -1,3 +1,52 @@
 ---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { content } from "../../data/mock/content";
+
+export function getStaticPaths() {
+  return content
+    .filter((item) => item.type === "PERSONA")
+    .map((item) => ({
+      params: { slug: item.data.slug },
+    }));
+}
+
+const { slug } = Astro.params;
+
+const person = content.find(
+  (item) => item.type === "PERSONA" && item.data.slug === slug,
+);
+
+if (!person) {
+  throw new Error("Persona no encontrada");
+}
+
+const related = content.filter((item) =>
+  person.data.related.includes(item.data.slug),
+);
 ---
 
+<BaseLayout title={person.data.title}>
+  <article class="p-10 max-w-4xl">
+    <h1 class="font-heading text-5xl mb-4">
+      {person.data.title}
+    </h1>
+
+    {person.data.bio && <p class="max-w-xl mb-10">{person.data.bio}</p>}
+
+    <section>
+      <h2 class="font-heading text-2xl mb-4">Actividad relacionada</h2>
+
+      <ul class="space-y-2">
+        {
+          related.map((item) => (
+            <li>
+              <a href={`/evento/${item.data.slug}`} class="underline">
+                {item.data.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </article>
+</BaseLayout>

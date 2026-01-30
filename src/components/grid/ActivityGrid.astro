@@ -11,13 +11,21 @@ const { items } = Astro.props as Props;
 
 const getVariant = (item: ContentNode) =>
   item.type === "PERSONA" ? "person" : item.data.isLive ? "live" : "event";
+
+const getHref = (item: ContentNode) =>
+  item.type === "PERSONA"
+    ? `/persona/${item.data.slug}`
+    : `/evento/${item.data.slug}`;
 ---
 
 <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[220px]">
   {items.map((item) => (
     <Card size={item.style.size}>
-      <div class="group relative h-full overflow-hidden">
-
+      <a
+        href={getHref(item)}
+        class="group relative block h-full overflow-hidden focus:outline-none"
+      >
+        <!-- imagen -->
         {item.data.image && (
           <img
             src={item.data.image}
@@ -26,10 +34,8 @@ const getVariant = (item: ContentNode) =>
           />
         )}
 
-        <!-- overlay -->
-        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition"></div>
 
-        <!-- content -->
         <div class="relative h-full p-5 flex flex-col justify-end text-white">
           <Tag
             label={item.data.label}
@@ -47,8 +53,7 @@ const getVariant = (item: ContentNode) =>
             </p>
           )}
         </div>
-
-      </div>
+      </a>
     </Card>
   ))}
 </section>
