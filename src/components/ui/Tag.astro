@@ -1,0 +1,20 @@
+---
+interface Props {
+  label: string;
+  variant?: "event" | "person" | "live";
+}
+
+const { label, variant = "event" } = Astro.props as Props;
+
+const variants = {
+  event: "bg-accent-event text-white",
+  person: "bg-accent-person text-white",
+  live: "bg-accent-live text-black",
+};
+---
+
+<span
+  class={`inline-block px-3 py-1 text-xs font-body uppercase tracking-wide rounded-full ${variants[variant]}`}
+>
+  {label}
+</span>

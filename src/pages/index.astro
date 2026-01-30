@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Tag from "../components/ui/Tag.astro";
+import Button from "../components/ui/Button.astro";
+import Card from "../components/ui/Card.astro";
+---
+
+<BaseLayout>
+  <section class="p-10 grid grid-cols-4 gap-6">
+    <Card size="large">
+      <div class="p-6">
+        <Tag label="Concierto" variant="event" />
+        <h2 class="font-heading text-2xl mt-4">Raps de la Koma</h2>
+        <Button label="Ver agenda" />
+      </div>
+    </Card>
+  </section>
+</BaseLayout>
