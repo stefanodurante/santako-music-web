@@ -1,5 +1,3 @@
-import type { ContentNode } from "../../types/content";
-
 export const content: ContentNode[] = [
   {
     type: "EVENTO",
@@ -9,6 +7,7 @@ export const content: ContentNode[] = [
       label: "CONCIERTO",
       slug: "raps-de-la-koma",
       date: "2026-03-15",
+      image: "/images/event-1.jpg",
       related: ["lia-kali"],
     },
   },
@@ -20,7 +19,8 @@ export const content: ContentNode[] = [
       label: "ARTISTA",
       slug: "lia-kali",
       bio: "Voz emergente de la escena urbana...",
+      image: "/images/person-1.jpg",
       related: ["raps-de-la-koma"],
     },
   },
-]; // Mock content data
+];

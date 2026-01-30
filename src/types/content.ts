@@ -11,8 +11,9 @@ export interface ContentNode {
     label: string;
     slug: string;
     date?: string;
-    isLive?: boolean;
     bio?: string;
+    image?: string;
+    isLive?: boolean;
     related: string[];
   };
 } // Content type definitions
