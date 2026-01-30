@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+/* === SANTAKO DESIGN TOKENS === */
+@theme {
+  --color-base: #F6F6F4;
+  --color-text: #0E0E10;
+  --color-dark: #1C1C1E;
+
+  --color-accent-person: #C61C6F;
+  --color-accent-event: #F05A28;
+  --color-accent-live: #9BFF00;
+}

@@ -1,0 +1,38 @@
+---
+import type { ContentNode } from "../../types/content";
+import Card from "../ui/Card.astro";
+import Tag from "../ui/Tag.astro";
+
+interface Props {
+  items: ContentNode[];
+}
+
+const { items } = Astro.props as Props;
+---
+
+<section class="grid grid-cols-4 gap-6 auto-rows-[200px]">
+  {
+    items.map((item) => (
+      <Card size={item.style.size}>
+        <div class="p-5 h-full flex flex-col justify-between">
+          <div>
+            <Tag
+              label={item.data.label}
+              variant={
+                item.type === "PERSONA"
+                  ? "person"
+                  : item.data.isLive
+                    ? "live"
+                    : "event"
+              }
+            />
+
+            <h3 class="font-heading text-xl mt-3">{item.data.title}</h3>
+          </div>
+
+          {item.data.date && <p class="text-sm opacity-70">{item.data.date}</p>}
+        </div>
+      </Card>
+    ))
+  }
+</section>

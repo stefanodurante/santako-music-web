@@ -1,0 +1,20 @@
+export default {
+  content: ["./src/**/*.{astro,html,js,jsx,ts,tsx}"],
+  theme: {
+    fontFamily: {
+      heading: ["Fraunces", "serif"],
+      body: ["Inter", "sans-serif"],
+    },
+    extend: {
+      colors: {
+        base: "#F6F6F4",
+        text: "#0E0E10",
+        dark: "#1C1C1E",
+
+        "accent-person": "#C61C6F",
+        "accent-event": "#F05A28",
+        "accent-live": "#9BFF00",
+      },
+    },
+  },
+}
