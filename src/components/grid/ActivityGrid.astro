@@ -8,29 +8,25 @@ interface Props {
 }
 
 const { items } = Astro.props as Props;
+
+const getVariant = (item: ContentNode) =>
+  item.type === "PERSONA" ? "person" : item.data.isLive ? "live" : "event";
 ---
 
-<section class="grid grid-cols-4 gap-6 auto-rows-[200px]">
+<section
+  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[200px]"
+>
   {
     items.map((item) => (
       <Card size={item.style.size}>
-        <div class="p-5 h-full flex flex-col justify-between">
-          <div>
-            <Tag
-              label={item.data.label}
-              variant={
-                item.type === "PERSONA"
-                  ? "person"
-                  : item.data.isLive
-                    ? "live"
-                    : "event"
-              }
-            />
+        <div class="group relative h-full p-5 flex flex-col justify-end bg-white hover:bg-neutral-50 transition">
+          <Tag label={item.data.label} variant={getVariant(item)} floating />
 
-            <h3 class="font-heading text-xl mt-3">{item.data.title}</h3>
-          </div>
+          <h3 class="font-heading text-xl leading-tight">{item.data.title}</h3>
 
-          {item.data.date && <p class="text-sm opacity-70">{item.data.date}</p>}
+          {item.data.date && (
+            <p class="text-sm opacity-60 mt-2">{item.data.date}</p>
+          )}
         </div>
       </Card>
     ))
