@@ -1,12 +1,32 @@
 @import "tailwindcss";
 
-/* === SANTAKO DESIGN TOKENS === */
+/* =========================
+   SANTAKO DESIGN SYSTEM
+   ========================= */
+
 @theme {
+  /* Base */
   --color-base: #F6F6F4;
   --color-text: #0E0E10;
   --color-dark: #1C1C1E;
 
+  /* Accents (semánticos) */
   --color-accent-person: #C61C6F;
   --color-accent-event: #F05A28;
   --color-accent-live: #9BFF00;
+  --color-accent-podcast: #1C1C1E;
+
+  /* Fonts */
+  --font-heading: "Fraunces", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+/* =========================
+   BASE STYLES
+   ========================= */
+
+body {
+  background-color: var(--color-base);
+  color: var(--color-text);
+  font-family: var(--font-body);
 }
