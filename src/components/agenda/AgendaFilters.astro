@@ -1,0 +1,22 @@
+---
+const months = [
+  "2025-05",
+  "2025-06",
+  "2025-07",
+];
+---
+
+<nav class="flex gap-6 px-10 mb-10">
+  <a href="/agenda" class="underline">
+    Todo
+  </a>
+
+  {months.map((month) => (
+    <a
+      href={`/agenda?month=${month}`}
+      class="underline"
+    >
+      {month}
+    </a>
+  ))}
+</nav>
