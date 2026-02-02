@@ -1,5 +1,8 @@
 export type ContentType = "EVENTO" | "PERSONA" | "PODCAST";
 
+/** Supported image formats: .jpg, .png, .webp */
+export type ImagePath = `${string}.${"jpg" | "jpeg" | "png" | "webp"}`;
+
 export interface ContentNode {
   type: ContentType;
   style: {
@@ -12,7 +15,8 @@ export interface ContentNode {
     slug: string;
     date?: string;
     bio?: string;
-    image?: string;
+    /** Array of image paths (.jpg, .png, .webp) */
+    images?: ImagePath[];
     isLive?: boolean;
     genres?: string[];
     members?: string[];

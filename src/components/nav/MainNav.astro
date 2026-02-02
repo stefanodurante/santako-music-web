@@ -1,0 +1,23 @@
+---
+import Logo from "../ui/Logo.astro";
+---
+
+<nav
+  class="flex items-center justify-between px-6 md:px-12 xl:px-24 py-8 border-b border-black/10"
+>
+  <Logo size="sm" />
+
+  <div class="hidden md:flex gap-10 text-xs uppercase tracking-widest">
+    <a href="/agenda" class="hover:text-[--color-accent-event]"> Agenda </a>
+    <a href="/personas" class="hover:text-[--color-accent-person]">
+      Personas
+    </a>
+    <a href="/podcast" class="hover:text-[--color-accent-podcast]"> Podcast </a>
+    <a
+      href="/contacto"
+      class="text-[--color-accent-event] font-bold underline underline-offset-4 italic"
+    >
+      Booking
+    </a>
+  </div>
+</nav>

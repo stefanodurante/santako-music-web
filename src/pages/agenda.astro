@@ -1,12 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import MainNav from "../components/nav/MainNav.astro";
 import AgendaHero from "../components/agenda/AgendaHero.astro";
-import AgendaFilters from "../components/agenda/AgendaFilters.astro";
-import AgendaList from "../components/agenda/AgendaList.astro";
+import CalendarMonth from "../components/agenda/CalendarMonth.astro";
 ---
 
-<BaseLayout title="Agenda">
+<BaseLayout title="Agenda · Santako Music">
+  <MainNav />
+
+  <!-- HERO DE AGENDA -->
   <AgendaHero />
-  <AgendaFilters />
-  <AgendaList />
+
+  <!-- CALENDARIO MENSUAL (ESTE COMPONENTE) -->
+  <CalendarMonth />
 </BaseLayout>

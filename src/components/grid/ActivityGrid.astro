@@ -26,9 +26,9 @@ const getHref = (item: ContentNode) =>
         class="group relative block h-full overflow-hidden focus:outline-none"
       >
         <!-- imagen -->
-        {item.data.image && (
+        {item.data.images?.[0] && (
           <img
-            src={item.data.image}
+            src={item.data.images[0]}
             alt={item.data.title}
             class="absolute inset-0 w-full h-full object-cover"
           />

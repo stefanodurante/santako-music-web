@@ -1,0 +1,18 @@
+---
+interface Props {
+  size?: "sm" | "md" | "lg";
+}
+
+const { size = "md" } = Astro.props;
+
+const sizes = {
+  sm: "text-xl",
+  md: "text-2xl",
+  lg: "text-4xl md:text-5xl",
+};
+---
+
+<a href="/" class={`font-heading uppercase tracking-tight ${sizes[size]}`}>
+  Santako
+  <span class="italic font-light normal-case ml-1"> Music </span>
+</a>

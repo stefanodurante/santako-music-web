@@ -1,27 +1,42 @@
 ---
-import Tag from "../ui/Tag.astro";
+import Logo from "../ui/Logo.astro";
 ---
 
-<header class="relative h-[75vh] min-h-[520px]">
+<section class="relative px-6 md:px-12 xl:px-24 py-24 container-wide">
+  <!-- LOGO GRÁFICO -->
   <img
-    src="/images/hero-home.jpg"
+    src="/logo/santako-music-logo.png"
     alt="Santako Music"
-    class="absolute inset-0 w-full h-full object-cover"
+    class="w-40 md:w-56 mb-12"
   />
-  <div class="absolute inset-0 bg-black/60"></div>
 
-  <div class="relative h-full flex items-end p-10 max-w-6xl text-white">
-    <div>
-      <Tag label="Archivo Vivo" variant="live" />
-      <h1
-        class="font-heading text-6xl md:text-[10rem] leading-[0.85] tracking-tighter"
+  <!-- TITULAR -->
+  <h1
+    class="font-heading text-6xl md:text-[10rem] leading-[0.85] tracking-tighter mb-12"
+  >
+    Archivo <span class="italic font-light">vivo</span><br />
+    & cultura <span class="text-[--color-accent-event]">urbana</span>
+  </h1>
+
+  <!-- BAJADA -->
+  <div class="flex flex-col md:flex-row justify-between items-end gap-12">
+    <p class="max-w-md text-xl md:text-2xl font-light leading-snug">
+      Dignificando la memoria musical de Santa Coloma a través de un archivo
+      editorial y una agenda en constante movimiento.
+    </p>
+
+    <div class="text-right">
+      <span class="block text-xs uppercase tracking-widest opacity-60 mb-2">
+        Próxima cita
+      </span>
+      <span class="block font-heading text-3xl italic">
+        Jam Session Can Sisteré
+      </span>
+      <span
+        class="block text-[--color-accent-event] font-bold uppercase tracking-widest text-sm mt-1"
       >
-        Archivo <span class="italic font-light">vivo</span><br />
-        & cultura <span class="text-[--color-accent-event]">urbana</span>
-      </h1>
-      <p class="max-w-xl text-lg opacity-90 mt-4">
-        Conciertos, artistas, podcast y cultura musical desde el territorio.
-      </p>
+        15 MAR — 20:00h
+      </span>
     </div>
   </div>
-</header>
+</section>
