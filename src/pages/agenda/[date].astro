@@ -1,21 +1,17 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import MainNav from "../../components/nav/MainNav.astro";
-import ContactBlock from "../../components/home/ContactBlock.astro";
 import { content } from "../../data/mock/content";
 
 /**
- * GENERAMOS UNA PÁGINA POR CADA DÍA CON EVENTOS
+ * STATIC PATHS
+ * Generamos solo días que tengan eventos
  */
 export function getStaticPaths() {
-  const events = content.filter(
-    (item) => item.type === "EVENTO" && item.data.date,
-  );
+  const dates = content
+    .filter((item) => item.type === "EVENTO" && item.data.date)
+    .map((item) => item.data.date);
 
-  // Sacamos fechas únicas
-  const uniqueDates = Array.from(
-    new Set(events.map((event) => event.data.date)),
-  );
+  const uniqueDates = Array.from(new Set(dates));
 
   return uniqueDates.map((date) => ({
     params: { date },
@@ -23,77 +19,110 @@ export function getStaticPaths() {
 }
 
 /**
- * FECHA ACTUAL DESDE LA URL
+ * PARAM
  */
 const { date } = Astro.params;
 
 /**
- * EVENTOS DE ESTE DÍA
+ * EVENTOS DEL DÍA
  */
-const eventsOfDay = content.filter(
+const events = content.filter(
   (item) => item.type === "EVENTO" && item.data.date === date,
 );
+
+if (events.length === 0) {
+  throw new Error("No hay eventos para este día");
+}
+
+/**
+ * UTILIDADES
+ */
+const day = new Date(date);
+const formattedDate = day.toLocaleDateString("es-ES", {
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
 ---
 
-<BaseLayout title={`Agenda · ${date}`}>
-  <!-- NAV -->
-  <MainNav />
+<BaseLayout title={`Agenda · ${formattedDate}`}>
+  <section class="px-6 md:px-12 xl:px-24 py-24 max-w-4xl mx-auto">
+    <!-- HEADER DÍA -->
+    <header class="mb-16">
+      <span class="text-xs uppercase tracking-widest opacity-60">
+        Agenda · Día
+      </span>
 
-  <!-- HERO DEL DÍA -->
-  <section class="px-6 md:px-12 xl:px-24 py-16 container-wide">
-    <span class="block text-xs uppercase tracking-widest opacity-60 mb-2">
-      Agenda · Día
-    </span>
+      <h1 class="font-heading text-4xl md:text-5xl mt-3 capitalize">
+        {formattedDate}
+      </h1>
+    </header>
 
-    <h1 class="font-heading text-5xl md:text-6xl">
-      {date}
-    </h1>
-
-    <p class="mt-4 max-w-md opacity-80">
-      Programación cultural de Santako Music para este día.
-    </p>
-  </section>
-
-  <!-- LISTADO DE EVENTOS DEL DÍA -->
-  <section class="px-6 md:px-12 xl:px-24 py-24 container-wide">
-    <ul class="space-y-16 max-w-3xl">
+    <!-- EVENTOS DEL DÍA -->
+    <section class="space-y-12">
       {
-        eventsOfDay.map((event) => (
-          <li class="border-b pb-10">
-            <span class="block text-xs uppercase tracking-widest text-[--color-accent-event] mb-2">
-              {event.data.label || "Evento"}
+        events.map((event) => (
+          <article class="border-t border-black/10 pt-8">
+            <span class="text-xs uppercase tracking-widest opacity-60">
+              {event.data.label}
             </span>
 
-            <h2 class="font-heading text-3xl mb-4">
-              <a href={`/evento/${event.data.slug}`} class="underline">
-                {event.data.title}
-              </a>
-            </h2>
+            <h2 class="font-heading text-3xl mt-2 mb-4">{event.data.title}</h2>
 
-            {event.data.images?.[0] && (
-              <img
-                src={event.data.images[0]}
-                alt={event.data.title}
-                class="mt-6 w-full max-w-md"
-              />
+            <a
+              href={`/evento/${event.data.slug}`}
+              class="inline-block text-sm uppercase tracking-widest border-b border-black pb-1 hover:opacity-70 transition"
+            >
+              Ver evento
+            </a>
+
+            {/* PERSONAS RELACIONADAS */}
+            {event.data.related && (
+              <div class="mt-6">
+                <p class="text-xs uppercase tracking-widest opacity-60 mb-2">
+                  Participan
+                </p>
+                <ul class="flex flex-wrap gap-3">
+                  {event.data.related.map((slug) => {
+                    const person = content.find(
+                      (item) =>
+                        item.type === "PERSONA" && item.data.slug === slug,
+                    );
+
+                    return (
+                      person && (
+                        <li>
+                          <a
+                            href={`/persona/${person.data.slug}`}
+                            class="underline"
+                          >
+                            {person.data.title}
+                          </a>
+                        </li>
+                      )
+                    );
+                  })}
+                </ul>
+              </div>
             )}
-
-            <p class="mt-4 opacity-70">
-              Evento organizado por Santako Music dentro de su programación
-              cultural.
-            </p>
-          </li>
+          </article>
         ))
       }
+    </section>
 
-      {
-        eventsOfDay.length === 0 && (
-          <li class="opacity-60">No hay eventos programados para este día.</li>
-        )
-      }
-    </ul>
+    <!-- CTA -->
+    <div class="mt-20 p-8 bg-neutral-50 border border-black/10">
+      <h3 class="font-heading text-2xl mb-4">¿Te apuntas?</h3>
+      <p class="max-w-md mb-6 opacity-80">
+        Consulta los detalles de cada evento o escríbenos si quieres colaborar.
+      </p>
+      <a
+        href="mailto:hola@santakomusic.com"
+        class="inline-block text-sm uppercase tracking-widest border-b border-black pb-1 hover:opacity-70 transition"
+      >
+        Contactar
+      </a>
+    </div>
   </section>
-
-  <!-- CTA FINAL -->
-  <ContactBlock />
 </BaseLayout>

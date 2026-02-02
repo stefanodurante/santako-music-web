@@ -1,0 +1,147 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { content } from "../../data/mock/content";
+
+/**
+ * CONFIGURACIÓN TEMPORAL
+ */
+const year = 2025;
+const monthIndex = 3; // Abril (0 = enero)
+const monthName = "Abril";
+
+/**
+ * FECHAS
+ */
+const monthPrefix = `${year}-${String(monthIndex + 1).padStart(2, "0")}`;
+const today = new Date().toISOString().split("T")[0];
+
+/**
+ * EVENTOS DEL MES
+ */
+type EventoNode = Extract<(typeof content)[number], { type: "EVENTO" }>;
+
+const events = content.filter(
+  (item): item is EventoNode =>
+    item.type === "EVENTO" &&
+    !!item.data.date &&
+    item.data.date.startsWith(monthPrefix)
+);
+
+/**
+ * AGRUPAR POR DÍA
+ */
+const eventsByDay: Record<string, EventoNode[]> = {};
+events.forEach((event) => {
+  const day = event.data.date!.split("-")[2];
+  if (!eventsByDay[day]) eventsByDay[day] = [];
+  eventsByDay[day].push(event);
+});
+
+/**
+ * UTILIDADES
+ */
+const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+
+const isPast = (date: string) => {
+  return new Date(date) < new Date(today);
+};
+
+const getEventColor = (label?: string) => {
+  if (!label) return "border-black/30";
+
+  const l = label.toLowerCase();
+  if (l.includes("dj")) return "border-accent-live";
+  if (l.includes("podcast")) return "border-accent-podcast";
+  return "border-accent-event";
+};
+---
+
+<BaseLayout title="Agenda · Santako Music">
+
+  <section class="px-6 md:px-12 xl:px-24 py-24 max-w-6xl mx-auto">
+
+    <!-- HEADER -->
+    <header class="mb-16">
+      <h1 class="font-heading text-5xl md:text-6xl mb-4">
+        Agenda
+      </h1>
+      <p class="opacity-80 mb-1">
+        {monthName} {year}
+      </p>
+      <p class="opacity-70 max-w-md">
+        Programación futura y memoria cultural reciente.
+      </p>
+    </header>
+
+    <!-- CALENDARIO -->
+    <div class="grid grid-cols-7 gap-4">
+
+      {Array.from({ length: daysInMonth }, (_, i) => {
+        const dayNumber = i + 1;
+        const day = String(dayNumber).padStart(2, "0");
+        const fullDate = `${monthPrefix}-${day}`;
+        const isToday = fullDate === today;
+        const past = isPast(fullDate);
+        const dayEvents = eventsByDay[day] || [];
+
+        return (
+          <div
+            class={`relative min-h-[150px] p-4 flex flex-col gap-3 border transition
+              ${
+                isToday
+                  ? "border-accent-live bg-accent-live/10"
+                  : past
+                  ? "border-black/5 bg-neutral-100"
+                  : "border-black/10 bg-white hover:bg-neutral-50"
+              }`}
+          >
+            <!-- DÍA -->
+            <a
+              href={`/agenda/${fullDate}`}
+              class="font-mono text-sm tracking-widest opacity-50 hover:opacity-80"
+            >
+              {String(dayNumber).padStart(2, "0")}
+            </a>
+
+            <!-- EVENTOS -->
+            <div class="flex flex-col gap-2">
+              {dayEvents.map((event) => (
+                <a
+                  href={`/evento/${event.data.slug}`}
+                  class={`inline-block text-xs uppercase tracking-widest pb-1 border-b transition
+                    ${
+                      past
+                        ? "border-black/20 text-black/50 hover:text-black/70"
+                        : `${getEventColor(event.data.label)} hover:opacity-80`
+                    }`}
+                >
+                  {event.data.title}
+                </a>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-20 p-10 border border-black/10 bg-neutral-50">
+      <h2 class="font-heading text-3xl mb-4">
+        ¿Quieres proponer una actividad?
+      </h2>
+      <p class="max-w-md mb-6 opacity-80">
+        Santako Music colabora con artistas, colectivos y espacios culturales.
+        Escríbenos y lo hablamos.
+      </p>
+      <a
+        href="mailto:hola@santakomusic.com?subject=Propuesta actividad"
+        class="inline-block text-sm uppercase tracking-widest border-b border-black pb-1 hover:opacity-70 transition"
+      >
+        Proponer actividad
+      </a>
+    </div>
+
+  </section>
+
+</BaseLayout>
