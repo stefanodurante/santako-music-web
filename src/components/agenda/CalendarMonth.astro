@@ -1,73 +1,102 @@
 ---
 import { content } from "../../data/mock/content";
 
-const events = content.filter((i) => i.type === "EVENTO");
-const month = "2025-04";
+/**
+ * CONFIGURACIÓN TEMPORAL
+ */
+const year = 2025;
+const monthIndex = 3; // 0 = enero → 3 = abril
+const month = `${year}-${String(monthIndex + 1).padStart(2, "0")}`;
 
-const daysInMonth = new Date(2025, 4, 0).getDate();
+/**
+ * EVENTOS DEL MES
+ */
+const events = content.filter(
+  (item) =>
+    item.type === "EVENTO" &&
+    item.data.date &&
+    item.data.date.startsWith(month),
+);
 
-const eventsByDay = events
-  .filter((e) => e.data.date?.startsWith(month))
-  .reduce((acc, e) => {
-    const day = e.data.date!.split("-")[2];
-    acc[day] = acc[day] || [];
-    acc[day].push(e);
+/**
+ * AGRUPAR EVENTOS POR DÍA (COMPATIBLE)
+ */
+const eventsByDay = events.reduce<Record<string, typeof events>>(
+  (acc, event) => {
+    const day = event.data.date!.split("-")[2];
+    if (!acc[day]) acc[day] = [];
+    acc[day].push(event);
     return acc;
-  }, {} as Record<string, typeof events>);
+  },
+  {},
+);
+
+/**
+ * DÍAS DEL MES
+ */
+const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
 ---
-<section class="px-6 md:px-12 xl:px-24 container-wide">
+
+<section class="px-6 md:px-12 xl:px-24 py-16 container-wide">
+  <h2 class="font-heading text-4xl mb-10">Agenda · Abril 2025</h2>
 
   <div class="grid grid-cols-7 gap-px bg-black/10">
+    {
+      Array.from({ length: daysInMonth }, (_, i) => {
+        const day = String(i + 1).padStart(2, "0");
+        const dayEvents = eventsByDay[day] || [];
+        const primaryEvent = dayEvents[0];
+        const extraCount = dayEvents.length - 1;
 
-    {Array.from({ length: daysInMonth }, (_, i) => {
-      const day = String(i + 1).padStart(2, "0");
-      const dayEvents = eventsByDay[day] || [];
-      const event = dayEvents[0];
+        return (
+          <div class="relative bg-[--color-base] min-h-[140px] p-3 overflow-hidden">
+            {/* DÍA */}
+            <span class="absolute top-2 right-2 text-xs opacity-40">{day}</span>
 
-      return (
-        <div class="bg-[--color-base] min-h-[140px] p-3 relative">
-
-          <!-- DÍA -->
-          <span class="text-xs opacity-40 absolute top-2 right-2">
-            {day}
-          </span>
-
-          <!-- SIN EVENTO -->
-          {!event && (
-            <div class="h-full flex items-center justify-center opacity-10 text-xs">
-              —
-            </div>
-          )}
-
-          <!-- CON EVENTO -->
-          {event && (
-            <a
-              href={`/evento/${event.data.slug}`}
-              class="group block h-full"
-            >
-              {event.data.images?.[0] && (
-                <img
-                  src={event.data.images[0]}
-                  alt={event.data.title}
-                  class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition"
-                />
-              )}
-
-              <div class="relative z-10">
-                <span class="block text-[10px] uppercase tracking-widest text-[--color-accent-event] mb-1">
-                  Evento
-                </span>
-
-                <h3 class="font-heading text-sm leading-tight">
-                  {event.data.title}
-                </h3>
+            {/* SIN EVENTOS */}
+            {dayEvents.length === 0 && (
+              <div class="h-full flex items-center justify-center text-xs opacity-10">
+                —
               </div>
-            </a>
-          )}
+            )}
 
-        </div>
-      );
-    })}
+            {/* CON EVENTOS */}
+            {primaryEvent && (
+              <a
+                href={`/evento/${primaryEvent.data.slug}`}
+                class="group block h-full relative"
+              >
+                {/* IMAGEN */}
+                {primaryEvent.data.images?.[0] && (
+                  <img
+                    src={primaryEvent.data.images[0]}
+                    alt={primaryEvent.data.title}
+                    class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition"
+                  />
+                )}
 
+                {/* CONTENIDO */}
+                <div class="relative z-10">
+                  <span class="block text-[10px] uppercase tracking-widest text-[--color-accent-event] mb-1">
+                    {primaryEvent.data.label || "Evento"}
+                  </span>
+
+                  <h3 class="font-heading text-sm leading-tight">
+                    {primaryEvent.data.title}
+                  </h3>
+
+                  {/* INDICADOR DE MÁS EVENTOS */}
+                  {extraCount > 0 && (
+                    <span class="block mt-2 text-[10px] uppercase tracking-widest opacity-60">
+                      +{extraCount} más
+                    </span>
+                  )}
+                </div>
+              </a>
+            )}
+          </div>
+        );
+      })
+    }
   </div>
 </section>

@@ -1,9 +1,12 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Tag from "../../components/ui/Tag.astro";
-import { content } from "../../data/mock/content";
 import CTAButton from "../../components/ui/CTAButton.astro";
+import { content } from "../../data/mock/content";
 
+/**
+ * GENERAMOS UNA PÁGINA POR CADA PERSONA
+ */
 export function getStaticPaths() {
   return content
     .filter((item) => item.type === "PERSONA")
@@ -12,44 +15,72 @@ export function getStaticPaths() {
     }));
 }
 
+/**
+ * SLUG ACTUAL
+ */
 const { slug } = Astro.params;
 
+/**
+ * PERSONA ACTUAL
+ */
 const person = content.find(
-  (item) => item.type === "PERSONA" && item.data.slug === slug,
+  (item): item is Extract<typeof item, { type: "PERSONA" }> =>
+    item.type === "PERSONA" && item.data.slug === slug,
 );
 
-if (!person) throw new Error("Persona no encontrada");
+if (!person) {
+  throw new Error("Persona no encontrada");
+}
 
+/**
+ * ACTIVIDAD RELACIONADA (EVENTOS / PODCAST)
+ */
 const related = content.filter((item) =>
-  person.data.related.includes(item.data.slug),
+  person.data.related?.includes(item.data.slug),
 );
 ---
 
 <BaseLayout title={person.data.title}>
-  <!-- HERO -->
+  <!-- HERO PERSONA -->
   <header class="relative h-[60vh] min-h-[420px]">
-    <img
-      src={person.data.image}
-      alt={person.data.title}
-      class="absolute inset-0 w-full h-full object-cover"
-    />
+    {
+      person.data.images?.[0] && (
+        <img
+          src={person.data.images[0]}
+          alt={person.data.title}
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+      )
+    }
+
     <div class="absolute inset-0 bg-black/50"></div>
 
-    <div class="relative h-full flex items-end p-10 text-white max-w-6xl">
-      <div>
-        <Tag label={person.data.label} variant="person" />
-        <h1 class="font-heading text-5xl mt-4">
+    <div
+      class="relative h-full flex items-end px-6 md:px-12 xl:px-24 pb-16 text-white"
+    >
+      <div class="max-w-6xl">
+        <Tag label={person.data.label ?? "Persona"} variant="person" />
+
+        <h1 class="font-heading text-5xl md:text-6xl mt-4">
           {person.data.title}
         </h1>
+        {
+          person.data.roles && person.data.roles.length > 0 && (
+            <p class="mt-3 text-sm uppercase tracking-widest opacity-80">
+              {person.data.roles.join(" · ")}
+            </p>
+          )
+        }
       </div>
     </div>
   </header>
 
-  <!-- CONTENIDO -->
-  <main class="p-10 max-w-3xl">
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="px-6 md:px-12 xl:px-24 py-20 max-w-6xl mx-auto">
+    <!-- GÉNEROS -->
     {
       person.data.genres && (
-        <ul class="flex flex-wrap gap-2 mb-6">
+        <ul class="flex flex-wrap gap-2 mb-8">
           {person.data.genres.map((genre) => (
             <li class="text-sm opacity-70 border px-3 py-1 rounded-full">
               {genre}
@@ -59,33 +90,55 @@ const related = content.filter((item) =>
       )
     }
 
+    <!-- BIO -->
     {
       person.data.bio && (
-        <p class="text-lg leading-relaxed mb-12">{person.data.bio}</p>
+        <p class="text-lg leading-relaxed font-light max-w-3xl mb-16">
+          {person.data.bio}
+        </p>
+      )
+    }
+    {
+      person.data.youtube && (
+        <section class="mb-12">
+          <a
+            href={person.data.youtube}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 underline text-lg"
+          >
+            <span>Ver en YouTube</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </section>
+      )
+    }
+    <!-- ACTIVIDAD RELACIONADA -->
+    {
+      related.length > 0 && (
+        <section class="mb-20">
+          <h2 class="font-heading text-2xl mb-6">Actividad en Santako Music</h2>
+
+          <ul class="space-y-4">
+            {related.map((item) => (
+              <li>
+                <a
+                  href={`/${
+                    item.type === "EVENTO" ? "evento" : "podcast"
+                  }/${item.data.slug}`}
+                  class="underline text-lg"
+                >
+                  {item.data.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
       )
     }
 
-    <!-- ACTIVIDAD RELACIONADA -->
-    <section>
-      <h2 class="font-heading text-2xl mb-4">Actividad en Santako Music</h2>
-
-      <ul class="space-y-3">
-        {
-          related.map((item) => (
-            <li>
-              <a
-                href={`/${item.type === "EVENTO" ? "evento" : "podcast"}/${item.data.slug}`}
-                class="underline"
-              >
-                {item.data.title}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-
-    <section class="mt-16 p-8 bg-neutral-100 rounded-lg">
+    <!-- CTA BOOKING -->
+    <section class="p-10 bg-neutral-100 rounded-xl">
       <h3 class="font-heading text-2xl mb-4">
         ¿Quieres programar a {person.data.title}?
       </h3>

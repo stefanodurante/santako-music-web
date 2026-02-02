@@ -12,15 +12,21 @@ export const content: ContentNode[] = [
       title: "Toni Dj",
       label: "DJ",
       slug: "toni-dj",
+
       genres: ["Electrónica", "Pop"],
+
       members: ["Toni Díaz"],
+
       bio: "Sesión ecléctica de hits atemporales y actuales para disfrutar y bailar.",
+
       instagram: "@tonidjbcn",
+
       images: [
         "/images/personas/toni-dj-1.jpg",
         "/images/personas/toni-dj-2.jpg",
         "/images/personas/toni-dj-3.jpg",
       ],
+
       related: ["santako-live-sessions"],
     },
   },
@@ -305,7 +311,7 @@ export const content: ContentNode[] = [
   },
   {
     type: "EVENTO",
-    style: { size: "medium", color: "accent-event"  },
+    style: { size: "medium", color: "accent-event" },
     data: {
       title: "Podcast Santako Live · Escena Local",
       slug: "podcast-santako-live-escena-local",
@@ -318,7 +324,7 @@ export const content: ContentNode[] = [
 
   {
     type: "EVENTO",
-    style: { size: "small", color: "accent-event"  },
+    style: { size: "small", color: "accent-event" },
     data: {
       title: "DJ Session · Santako Nights",
       slug: "dj-session-santako-nights",
@@ -331,36 +337,25 @@ export const content: ContentNode[] = [
   // ======================
   // PODCAST (FAKE, COHERENTE)
   // ======================
-
   {
     type: "PODCAST",
-    style: { size: "medium", color: "accent-live" },
     data: {
-      title: "Santako Podcast #12 · Escena Local",
-      label: "PODCAST",
-      slug: "podcast-12-escena-local",
-      images: [
-        "/images/personas/podcast-12-escena-local-1.jpg",
-        "/images/personas/podcast-12-escena-local-2.jpg",
-        "/images/personas/podcast-12-escena-local-3.jpg",
-      ],
-      related: ["toni-dj", "motosierras", "daniel-higienico"],
-    },
-  },
+      title: "Podcast Santako · Abril 2025",
+      slug: "podcast-santako-abril-2025",
 
-  {
-    type: "PODCAST",
-    style: { size: "small", color: "accent-live" },
-    data: {
-      title: "Santako Podcast #13 · Rock & Actitud",
-      label: "PODCAST",
-      slug: "podcast-13-rock-actitud",
-      images: [
-        "/images/personas/podcast-13-rock-actitud-1.jpg",
-        "/images/personas/podcast-13-rock-actitud-2.jpg",
-        "/images/personas/podcast-13-rock-actitud-3.jpg",
-      ],
-      related: ["motosierras", "eltoni-elpako-elaitor"],
+      date: "2025-04-30",
+
+      description:
+        "Sesión mensual del podcast Santako Music grabada en directo, con invitados de la escena local.",
+
+      youtube: {
+        channel: "https://www.youtube.com/@santakomusic",
+        videoUrl: "https://www.youtube.com/watch?v=XXXXXXXX",
+      },
+
+      images: ["/images/podcast/podcast-abril-2025.jpg"],
+
+      related: ["dj-albert-b", "daniel-higienico"],
     },
   },
 ];

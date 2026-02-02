@@ -10,51 +10,54 @@ interface Props {
 const { items } = Astro.props as Props;
 
 const getVariant = (item: ContentNode) =>
-  item.type === "PERSONA" ? "person" : item.data.isLive ? "live" : "event";
-
-const getHref = (item: ContentNode) =>
   item.type === "PERSONA"
-    ? `/persona/${item.data.slug}`
-    : `/evento/${item.data.slug}`;
+    ? "person"
+    : item.type === "PODCAST"
+      ? "podcast"
+      : item.data.isLive
+        ? "live"
+        : "event";
 ---
 
-<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[220px]">
-  {items.map((item) => (
-    <Card size={item.style.size}>
-      <a
-        href={getHref(item)}
-        class="group relative block h-full overflow-hidden focus:outline-none"
-      >
-        <!-- imagen -->
-        {item.data.images?.[0] && (
-          <img
-            src={item.data.images[0]}
-            alt={item.data.title}
-            class="absolute inset-0 w-full h-full object-cover"
-          />
-        )}
+<section class="grid grid-cols-4 gap-6 auto-rows-[200px]">
+  {
+    items.map((item) => {
+      const image = item.data.images?.[0];
 
-        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition"></div>
+      return (
+        <Card size={item.style?.size ?? "medium"}>
+          <div class="group relative h-full overflow-hidden">
+            {/* IMAGEN */}
+            {image && (
+              <img
+                src={image}
+                alt={item.data.title}
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            )}
 
-        <div class="relative h-full p-5 flex flex-col justify-end text-white">
-          <Tag
-            label={item.data.label}
-            variant={getVariant(item)}
-            floating
-          />
+            {/* OVERLAY */}
+            <div class="absolute inset-0 bg-black/40" />
 
-          <h3 class="font-heading text-xl leading-tight">
-            {item.data.title}
-          </h3>
+            {/* CONTENIDO */}
+            <div class="relative h-full p-5 flex flex-col justify-end text-white">
+              <Tag
+                label={item.data.label ?? item.type}
+                variant={getVariant(item)}
+                floating
+              />
 
-          {item.data.date && (
-            <p class="text-sm opacity-80 mt-1">
-              {item.data.date}
-            </p>
-          )}
-        </div>
-      </a>
-    </Card>
-  ))}
+              <h3 class="font-heading text-xl leading-tight mt-2">
+                {item.data.title}
+              </h3>
+
+              {item.data.date && (
+                <p class="text-sm opacity-70 mt-1">{item.data.date}</p>
+              )}
+            </div>
+          </div>
+        </Card>
+      );
+    })
+  }
 </section>
-
