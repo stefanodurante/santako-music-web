@@ -61,26 +61,6 @@ export const content: ContentNode[] = [
     type: "PERSONA",
     style: { size: "medium", color: "accent-person" },
     data: {
-      title: "Famous Monsters",
-      label: "TRIBUTO",
-      slug: "famous-monsters",
-      genres: ["Punk"],
-      members: ["Sergi Gallardo", "Oliver Cabrera"],
-      bio: "Tributo acústico a Misfits con un show familiar y divertido.",
-      instagram: "@headcrusher3",
-      images: [
-        "/images/personas/famous-monsters-1.jpg",
-        "/images/personas/famous-monsters-2.jpg",
-        "/images/personas/famous-monsters-3.jpg",
-      ],
-      related: ["acoustic-nights"],
-    },
-  },
-
-  {
-    type: "PERSONA",
-    style: { size: "medium", color: "accent-person" },
-    data: {
       title: "Frantxu Kalamaro",
       label: "ARTISTA",
       slug: "frantxu-kalamaro",
@@ -89,11 +69,7 @@ export const content: ContentNode[] = [
       bio: "Showman pop-rock, imitaciones y animación musical.",
       instagram: "@frantxukalamaro",
       youtube: "https://youtu.be/fF-SFgbS5VM",
-      images: [
-        "/images/personas/frantxu-kalamaro-1.jpg",
-        "/images/personas/frantxu-kalamaro-2.jpg",
-        "/images/personas/frantxu-kalamaro-3.jpg",
-      ],
+      images: ["/images/personas/frantxu-kalamaro-1.jpg"],
       related: ["santako-live-sessions"],
     },
   },
@@ -109,11 +85,7 @@ export const content: ContentNode[] = [
       members: ["Paco Almendros", "Xavi Cano", "Carlos Solans", "Jordi Prat"],
       bio: "Banda de versiones y temas propios con espíritu rock clásico.",
       instagram: "@srq_grup",
-      images: [
-        "/images/personas/sr-q-1.jpg",
-        "/images/personas/sr-q-2.jpg",
-        "/images/personas/sr-q-3.jpg",
-      ],
+      images: ["/images/personas/sr-q-1.jpg"],
       related: ["santako-live-sessions"],
     },
   },
@@ -206,27 +178,6 @@ export const content: ContentNode[] = [
       related: ["santako-live-sessions"],
     },
   },
-
-  {
-    type: "PERSONA",
-    style: { size: "small", color: "accent-person" },
-    data: {
-      title: "Los Hijos de James",
-      label: "DUO",
-      slug: "los-hijos-de-james",
-      genres: ["Pop", "Rock", "Indie"],
-      members: ["Toni Civico", "Stefano Durante"],
-      bio: "Dúo de versiones pop, rock e indie.",
-      instagram: "@bonbonsabroson",
-      images: [
-        "/images/personas/los-hijos-de-james-1.jpg",
-        "/images/personas/los-hijos-de-james-2.jpg",
-        "/images/personas/los-hijos-de-james-3.jpg",
-      ],
-      related: ["acoustic-nights"],
-    },
-  },
-
   {
     type: "PERSONA",
     style: { size: "medium", color: "accent-person" },
