@@ -1,0 +1,9 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+
+<!-- src/components/ui/LogoImage.astro -->
+<img src="/logo/santako-music-logo.png" alt="Santako Music" class={className} />

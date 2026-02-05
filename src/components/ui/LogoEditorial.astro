@@ -1,9 +1,10 @@
 ---
 interface Props {
   size?: "sm" | "md" | "lg";
+  class?: string;
 }
 
-const { size = "md" } = Astro.props;
+const { size = "md", class: className = "" } = Astro.props;
 
 const sizes = {
   sm: "text-xl",
@@ -12,7 +13,7 @@ const sizes = {
 };
 ---
 
-<a href="/" class={`font-heading uppercase tracking-tight ${sizes[size]}`}>
+<a href="/" class={`font-heading uppercase tracking-tight ${sizes[size]} ${className}`}>
   Santako
   <span class="italic font-light normal-case ml-1"> Music </span>
 </a>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { content } from "../../data/mock/content";
+import { wpPosts } from "../../data/mock/wp-posts";
 
 /**
  * CONFIGURACIÓN TEMPORAL
@@ -26,15 +27,36 @@ const events = content.filter(
     !!item.data.date &&
     item.data.date.startsWith(monthPrefix)
 );
+/**
+ * ADAPTAR WP POSTS A FORMATO AGENDA
+ */
+const wpAgendaItems = wpPosts.map((post) => ({
+  type: "WP",
+  data: {
+    title: post.title,
+    slug: post.slug,
+    date: post.date,
+    label: "CRÓNICA",
+  },
+}));
+
 
 /**
- * AGRUPAR POR DÍA
+ * AGENDA UNIFICADA (EVENTO + WP)
  */
-const eventsByDay: Record<string, EventoNode[]> = {};
-events.forEach((event) => {
-  const day = event.data.date!.split("-")[2];
-  if (!eventsByDay[day]) eventsByDay[day] = [];
-  eventsByDay[day].push(event);
+const agendaItems = [
+  ...events,
+  ...wpAgendaItems,
+];
+/**
+ * AGRUPAR ITEMS POR DÍA
+ */
+const itemsByDay: Record<string, typeof agendaItems> = {};
+
+agendaItems.forEach((item) => {
+  const day = item.data.date!.split("-")[2];
+  if (!itemsByDay[day]) itemsByDay[day] = [];
+  itemsByDay[day].push(item);
 });
 
 /**
@@ -54,11 +76,30 @@ const getEventColor = (label?: string) => {
   if (l.includes("podcast")) return "border-accent-podcast";
   return "border-accent-event";
 };
+
+/**
+ * OBTENER IMAGEN DEL DÍA
+ * - último evento del día
+ * - si no hay evento → placeholder
+ */
+const getDayImage = (items: typeof agendaItems) => {
+  const eventsOnly = items.filter(
+    (item): item is EventoNode =>
+      item.type === "EVENTO" && "images" in item.data && !!item.data.images?.length
+  );
+
+  if (eventsOnly.length > 0) {
+    const lastEvent = eventsOnly[eventsOnly.length - 1];
+    return lastEvent.data.images![0];
+  }
+
+  return "/images/placeholder-agenda.jpg";
+};
 ---
 
 <BaseLayout title="Agenda · Santako Music">
 
-  <section class="px-6 md:px-12 xl:px-24 py-24 max-w-6xl mx-auto">
+  <section class="px-6 md:px-12 xl:px-24 py-24 container-wide">
 
     <!-- HEADER -->
     <header class="mb-16">
@@ -82,7 +123,7 @@ const getEventColor = (label?: string) => {
         const fullDate = `${monthPrefix}-${day}`;
         const isToday = fullDate === today;
         const past = isPast(fullDate);
-        const dayEvents = eventsByDay[day] || [];
+        const dayEvents = itemsByDay[day] || [];
 
         return (
           <div
@@ -95,6 +136,15 @@ const getEventColor = (label?: string) => {
                   : "border-black/10 bg-white hover:bg-neutral-50"
               }`}
           >
+            <!-- IMAGEN DEL DÍA -->
+<div class="relative h-24 w-full overflow-hidden rounded-sm">
+  <img
+    src={getDayImage(dayEvents)}
+    alt=""
+    class="absolute inset-0 w-full h-full object-cover"
+    loading="lazy"
+  />
+</div>
             <!-- DÍA -->
             <a
               href={`/agenda/${fullDate}`}
@@ -105,17 +155,21 @@ const getEventColor = (label?: string) => {
 
             <!-- EVENTOS -->
             <div class="flex flex-col gap-2">
-              {dayEvents.map((event) => (
+              {dayEvents.map((item) => (
                 <a
-                  href={`/evento/${event.data.slug}`}
+                  href={
+                    item.type === "WP"
+                      ? `/archivo/${item.data.slug}`
+                      : `/evento/${item.data.slug}`
+                  }
                   class={`inline-block text-xs uppercase tracking-widest pb-1 border-b transition
                     ${
-                      past
-                        ? "border-black/20 text-black/50 hover:text-black/70"
-                        : `${getEventColor(event.data.label)} hover:opacity-80`
+                      item.type === "WP"
+                        ? "border-black/30 text-black/50 hover:text-black/70"
+                        : "border-accent-event hover:opacity-80"
                     }`}
                 >
-                  {event.data.title}
+                  {item.data.title}
                 </a>
               ))}
             </div>

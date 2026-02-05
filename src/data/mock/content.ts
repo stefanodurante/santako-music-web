@@ -221,7 +221,30 @@ export const content: ContentNode[] = [
   // ======================
   // EVENTOS (FAKE, COHERENTES)
   // ======================
+  {
+    type: "EVENTO",
+    style: { size: "large", color: "accent-event" },
+    data: {
+      title: "Jam Session Can Sisteré",
+      slug: "jam-session-can-sistere",
+      date: "2025-03-15",
 
+      // 👇 IMÁGENES DEL EVENTO
+      images: [
+        "/images/eventos/jam-session-can-sistere-1.jpg",
+        "/images/eventos/jam-session-can-sistere-2.jpg",
+      ],
+
+      // 👇 IMAGEN ESPECÍFICA PARA EL HERO
+      heroImage: "/images/eventos/jam-session-can-sistere-hero.jpg",
+
+      // 👇 FLAGS EDITORIALES
+      isHero: true,
+      heroPriority: 1,
+
+      related: [],
+    },
+  },
   {
     type: "EVENTO",
     style: { size: "large", color: "accent-event" },
@@ -231,10 +254,12 @@ export const content: ContentNode[] = [
       slug: "santako-live-sessions",
       date: "2025-06-14",
       images: [
-        "/images/personas/santako-live-sessions-1.jpg",
-        "/images/personas/santako-live-sessions-2.jpg",
-        "/images/personas/santako-live-sessions-3.jpg",
+        "/images/eventos/santako-live-sessions-1.jpg",
+        "/images/eventos/santako-live-sessions-2.jpg",
+        "/images/eventos/santako-live-sessions-3.jpg",
       ],
+      isHero: true,
+      heroPriority: 1,
       related: ["toni-dj", "motosierras", "sr-q", "dkorales", "dj-albert-b"],
     },
   },

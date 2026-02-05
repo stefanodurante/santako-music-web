@@ -1,34 +1,16 @@
 ---
-
+import LogoEditorial from "../ui/LogoEditorial.astro";
+import MainNav from "../nav/MainNav.astro";
 ---
 
 <header
   class="sticky top-0 z-50 bg-sk-white/90 backdrop-blur border-b border-black/10"
 >
   <div
-    class="max-w-7xl mx-auto px-6 md:px-12 xl:px-24 py-6 flex items-center justify-between"
+    class="flex items-center justify-between px-6 md:px-12 xl:px-24 py-6 container-wide"
   >
-    <!-- LOGO -->
-    <a href="/" class="font-heading text-2xl tracking-tight uppercase">
-      Santako<span class="italic font-light">Music</span>
-    </a>
-
-    <!-- NAV -->
-    <nav
-      class="hidden md:flex items-center gap-10 text-sm uppercase tracking-widest"
-    >
-      <a href="/agenda" class="hover:opacity-60 transition">Agenda</a>
-      <a href="/personas" class="hover:opacity-60 transition">Personas</a>
-      <a href="/podcast" class="hover:opacity-60 transition">Podcast</a>
-      <a
-        href="mailto:hola@santakomusic.com?subject=Propuesta cultural"
-        class="border-b border-black pb-1 hover:opacity-60 transition"
-      >
-        Proponer actividad
-      </a>
-    </nav>
-
-    <!-- MOBILE -->
-    <button class="md:hidden text-xs uppercase tracking-widest"> Menu </button>
+    <LogoEditorial />
+    <MainNav />
   </div>
+
 </header>

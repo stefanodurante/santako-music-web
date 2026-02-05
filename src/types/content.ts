@@ -43,8 +43,11 @@ export type EventoData = {
   date?: string;
 
   images?: ImagePath[];
+  heroImage?: ImagePath;
 
   isLive?: boolean;
+  isHero?: boolean;
+  heroPriority?: number;
   related?: string[];
 };
 

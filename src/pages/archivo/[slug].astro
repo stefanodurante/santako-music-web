@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { wpPosts } from "../../data/mock/wp-posts";
+
+/**
+ * RUTAS ESTÁTICAS
+ */
+export function getStaticPaths() {
+  return wpPosts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+/**
+ * POST ACTUAL
+ */
+const post = wpPosts.find((p) => p.slug === slug);
+
+if (!post) {
+  throw new Error("Artículo no encontrado");
+}
+---
+
+<BaseLayout title={post.title}>
+
+  <article class="px-6 md:px-12 xl:px-24 py-24 max-w-3xl mx-auto">
+
+    <!-- CONTEXTO -->
+    <span class="text-xs uppercase tracking-widest opacity-60">
+      Archivo Santako Music
+    </span>
+
+    <!-- TÍTULO -->
+    <h1 class="font-heading text-5xl mt-4 mb-6">
+      {post.title}
+    </h1>
+
+    <!-- FECHA -->
+    <p class="opacity-60 mb-10">
+      {new Date(post.date).toLocaleDateString("es-ES", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })}
+    </p>
+
+    <!-- CONTENIDO -->
+    <div class="text-lg leading-relaxed space-y-6">
+      <p>{post.excerpt}</p>
+    </div>
+
+    <!-- VOLVER -->
+    <div class="mt-20">
+      <a
+        href="/agenda"
+        class="text-sm uppercase tracking-widest border-b border-black pb-1 hover:opacity-70 transition"
+      >
+        ← Volver a la agenda
+      </a>
+    </div>
+
+  </article>
+
+</BaseLayout>

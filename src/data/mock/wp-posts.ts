@@ -5,11 +5,19 @@ export type WPPost = {
     date: string;
     excerpt: string;
   };
-  
+
   export const wpPosts: WPPost[] = [
     {
       source: "WP",
       title: "Jam Session Can Sisteré",
+      slug: "jam-session-can-sistere",
+      date: "2025-04-10",
+      excerpt:
+        "Una noche de improvisación y conexión musical en el corazón del barrio.",
+    },
+    {
+      source: "WP",
+      title: "Otro evento",
       slug: "jam-session-can-sistere",
       date: "2025-04-10",
       excerpt:
@@ -32,4 +40,3 @@ export type WPPost = {
         "Un repaso visual y emocional a una de las noches acústicas más especiales.",
     },
   ];
-  

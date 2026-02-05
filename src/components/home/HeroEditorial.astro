@@ -1,42 +1,86 @@
 ---
-import Logo from "../ui/Logo.astro";
+import Logo from "../ui/LogoImage.astro";
+import { content } from "../../data/mock/content";
+import type { ContentNode } from "../../types/content";
+
+type EventoNode = Extract<ContentNode, { type: "EVENTO" }>;
+
+// 1. Eventos marcados como Hero
+const heroEvents = content
+  .filter(
+    (item): item is EventoNode => item.type === "EVENTO" && !!item.data.isHero,
+  )
+  .sort(
+    (a: EventoNode, b: EventoNode) =>
+      (a.data.heroPriority ?? 0) - (b.data.heroPriority ?? 0),
+  );
+
+// 2. Evento activo del Hero
+const heroEvent = heroEvents[0];
+
+// 3. Imagen del Hero (orden de prioridad)
+const heroImage =
+  heroEvent?.data.heroImage ??
+  heroEvent?.data.images?.[0] ??
+  "/images/placeholder-hero.jpg";
 ---
 
-<section class="relative px-6 md:px-12 xl:px-24 py-24 container-wide">
-  <!-- LOGO GRÁFICO -->
-  <img
-    src="/logo/santako-music-logo.png"
-    alt="Santako Music"
-    class="w-40 md:w-56 mb-12"
-  />
+<section class="relative min-h-[65vh] w-full overflow-hidden text-white">
+  <!-- IMAGEN DE FONDO -->
+  <div class="absolute inset-0 -z-10">
+    <img
+      src={heroImage}
+      alt={heroEvent?.data.title || "Santako Music"}
+      class="w-full h-full object-cover"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-black/55"></div>
+  </div>
 
-  <!-- TITULAR -->
-  <h1
-    class="font-heading text-6xl md:text-[10rem] leading-[0.85] tracking-tighter mb-12"
+  <!-- CONTENIDO -->
+  <div
+    class="relative min-h-full flex flex-col
+         px-6 md:px-12 xl:px-24
+         pt-10 md:pt-12
+         pb-6 md:pb-8
+         container-wide"
   >
-    Archivo <span class="italic font-light">vivo</span><br />
-    & cultura <span class="text-[--color-accent-event]">urbana</span>
-  </h1>
+    <!-- TOP -->
+    <div>
+      <Logo class="w-40 md:w-56 mb-10" />
 
-  <!-- BAJADA -->
-  <div class="flex flex-col md:flex-row justify-between items-end gap-12">
-    <p class="max-w-md text-xl md:text-2xl font-light leading-snug">
-      Dignificando la memoria musical de Santa Coloma a través de un archivo
-      editorial y una agenda en constante movimiento.
-    </p>
-
-    <div class="text-right">
-      <span class="block text-xs uppercase tracking-widest opacity-60 mb-2">
-        Próxima cita
-      </span>
-      <span class="block font-heading text-3xl italic">
-        Jam Session Can Sisteré
-      </span>
-      <span
-        class="block text-[--color-accent-event] font-bold uppercase tracking-widest text-sm mt-1"
+      <h1
+        class="font-heading text-5xl md:text-[8.5rem]
+         leading-[0.9] tracking-[-0.03em]
+         mb-20 md:mb-32"
       >
-        15 MAR — 20:00h
-      </span>
+        Archivo <span class="italic font-light">vivo</span><br />
+        & cultura <span class="text-[--color-accent-event]">urbana</span>
+      </h1>
     </div>
+
+    <!-- BOTTOM -->
+    {
+      heroEvent && (
+        <div class="mt-auto flex flex-col md:flex-row justify-between items-end gap-12">
+          <p class="max-w-md text-xl md:text-2xl font-light leading-snug opacity-90">
+            Dignificando la memoria musical de Santa Coloma a través de un
+            archivo editorial y una agenda en constante movimiento.
+          </p>
+
+          <div class="text-right">
+            <span class="block text-xs uppercase tracking-widest opacity-70 mb-2">
+              Próxima cita
+            </span>
+            <span class="block font-heading text-3xl italic">
+              {heroEvent.data.title}
+            </span>
+            <span class="block text-[--color-accent-event] font-bold uppercase tracking-widest text-sm mt-1">
+              {heroEvent.data.date}
+            </span>
+          </div>
+        </div>
+      )
+    }
   </div>
 </section>

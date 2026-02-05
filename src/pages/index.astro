@@ -4,6 +4,7 @@ import MainNav from "../components/nav/MainNav.astro";
 import AgendaHome from "../components/home/AgendaHome.astro";
 import HeroEditorial from "../components/home/HeroEditorial.astro";
 import PersonaDestacada from "../components/home/PersonaDestacada.astro";
+import PodcastBlock from "../components/home/PodcastBlock.astro";
 import ActivityGrid from "../components/grid/ActivityGrid.astro";
 import ContactBlock from "../components/home/ContactBlock.astro";
 
@@ -11,7 +12,6 @@ import { content } from "../data/mock/content";
 ---
 
 <BaseLayout>
-
   <!-- HERO -->
   <HeroEditorial />
 
@@ -20,6 +20,9 @@ import { content } from "../data/mock/content";
 
   <!-- PERSONA DESTACADA -->
   <PersonaDestacada />
+
+  <!-- PODCAST -->
+  <PodcastBlock />
 
   <!-- ARCHIVO VIVO -->
   <section class="px-6 md:px-12 xl:px-24 py-24 container-wide">
