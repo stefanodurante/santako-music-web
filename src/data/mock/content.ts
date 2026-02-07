@@ -142,11 +142,7 @@ export const content: ContentNode[] = [
       bio: "Cantautor con humor, teatro y espíritu rock.",
       instagram: "@daniel.higienico",
       youtube: "https://youtu.be/I7UTZF51TYA",
-      images: [
-        "/images/personas/daniel-higienico-1.jpg",
-        "/images/personas/daniel-higienico-2.jpg",
-        "/images/personas/daniel-higienico-3.jpg",
-      ],
+      images: ["/images/personas/daniel-higienico-1.jpg"],
       related: ["acoustic-nights"],
     },
   },
@@ -170,11 +166,7 @@ export const content: ContentNode[] = [
       ],
       bio: "Versiones pop-rock españolas de los 80 y 90. Fiesta asegurada.",
       instagram: "@aptoparaconsumobcn",
-      images: [
-        "/images/personas/apto-para-consumo-1.jpg",
-        "/images/personas/apto-para-consumo-2.jpg",
-        "/images/personas/apto-para-consumo-3.jpg",
-      ],
+      images: ["/images/personas/apto-para-consumo-1.jpg"],
       related: ["santako-live-sessions"],
     },
   },
@@ -189,11 +181,7 @@ export const content: ContentNode[] = [
       members: ["Albert Bastida"],
       bio: "DJ con fuerte conexión con el público y gran versatilidad musical.",
       instagram: "@abp_365",
-      images: [
-        "/images/personas/dj-albert-b-1.jpg",
-        "/images/personas/dj-albert-b-2.jpg",
-        "/images/personas/dj-albert-b-3.jpg",
-      ],
+      images: ["/images/personas/dj-albert-b-1.jpg"],
       related: ["santako-live-sessions"],
     },
   },
@@ -209,11 +197,7 @@ export const content: ContentNode[] = [
       members: ["Antonio Molina", "Paco Molina", "Aitor Sotillos"],
       bio: "Trío de punk psicodélico con actitud festiva y mensaje de amistad.",
       instagram: "@eltonielpakoelaitor",
-      images: [
-        "/images/personas/eltoni-elpako-elaitor-1.jpg",
-        "/images/personas/eltoni-elpako-elaitor-2.jpg",
-        "/images/personas/eltoni-elpako-elaitor-3.jpg",
-      ],
+      images: ["/images/personas/eltoni-elpako-elaitor-1.jpg"],
       related: ["santako-live-sessions"],
     },
   },
@@ -272,11 +256,7 @@ export const content: ContentNode[] = [
       label: "CONCIERTO",
       slug: "acoustic-nights",
       date: "2025-05-30",
-      images: [
-        "/images/personas/acoustic-nights-1.jpg",
-        "/images/personas/acoustic-nights-2.jpg",
-        "/images/personas/acoustic-nights-3.jpg",
-      ],
+      images: ["/images/eventos/event-1.jpg"],
       related: [
         "famous-monsters",
         "paco-xavi",
@@ -329,7 +309,7 @@ export const content: ContentNode[] = [
         videoUrl: "https://www.youtube.com/watch?v=XXXXXXXX",
       },
 
-      images: ["/images/podcast/podcast-abril-2025.jpg"],
+      images: ["/images/eventos/podcast-live-1.jpg"],
 
       related: ["dj-albert-b", "daniel-higienico"],
     },

@@ -8,7 +8,7 @@ const podcasts = content
 ---
 
 <BaseLayout title="Podcast · Santako Music">
-  <section class="px-6 md:px-12 xl:px-24 py-24 container-wide">
+  <section id="podcast-archive" class="section-podcast px-6 md:px-12 xl:px-24 py-24 container-wide">
     <h1 class="font-heading text-5xl mb-10">Podcast Santako Music</h1>
 
     <p class="max-w-2xl text-lg opacity-80 mb-16">
@@ -26,7 +26,7 @@ const podcasts = content
 
     {
       podcasts.length > 0 && (
-        <section class="mt-24">
+        <section id="podcast-list" class="section-list mt-24">
           <h2 class="font-heading text-3xl mb-8">Archivo de sesiones</h2>
 
           <ul class="space-y-8">

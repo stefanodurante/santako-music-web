@@ -47,9 +47,9 @@ const formattedDate = day.toLocaleDateString("es-ES", {
 ---
 
 <BaseLayout title={`Agenda · ${formattedDate}`}>
-  <section class="px-6 md:px-12 xl:px-24 py-24 container-wide">
+  <section id="agenda-dia" class="section-agenda px-6 md:px-12 xl:px-24 py-24 container-wide">
     <!-- HEADER DÍA -->
-    <header class="mb-16">
+    <header class="section-header mb-16">
       <span class="text-xs uppercase tracking-widest opacity-60">
         Agenda · Día
       </span>
@@ -60,7 +60,7 @@ const formattedDate = day.toLocaleDateString("es-ES", {
     </header>
 
     <!-- EVENTOS DEL DÍA -->
-    <section class="space-y-12">
+    <section class="section-events space-y-12">
       {
         events.map((event) => (
           <article class="border-t border-black/10 pt-8">
@@ -112,7 +112,7 @@ const formattedDate = day.toLocaleDateString("es-ES", {
     </section>
 
     <!-- CTA -->
-    <div class="mt-20 p-8 bg-neutral-50 border border-black/10">
+    <div id="agenda-cta" class="section-cta mt-20 p-8 bg-neutral-50 border border-black/10">
       <h3 class="font-heading text-2xl mb-4">¿Te apuntas?</h3>
       <p class="max-w-md mb-6 opacity-80">
         Consulta los detalles de cada evento o escríbenos si quieres colaborar.

@@ -42,7 +42,7 @@ const related = content.filter((item) =>
 
 <BaseLayout title={person.data.title}>
   <!-- HERO PERSONA -->
-  <header class="relative h-[60vh] min-h-[420px]">
+  <header id="persona-hero" class="section-hero relative h-[60vh] min-h-[420px]">
     {
       person.data.images?.[0] && (
         <img
@@ -76,7 +76,7 @@ const related = content.filter((item) =>
   </header>
 
   <!-- CONTENIDO PRINCIPAL -->
-  <main class="px-6 md:px-12 xl:px-24 py-20 max-w-6xl mx-auto">
+  <main id="persona-content" class="section-content px-6 md:px-12 xl:px-24 py-20 max-w-6xl mx-auto">
     <!-- GÉNEROS -->
     {
       person.data.genres && (
@@ -100,7 +100,7 @@ const related = content.filter((item) =>
     }
     {
       person.data.youtube && (
-        <section class="mb-12">
+        <section class="section-youtube mb-12">
           <a
             href={person.data.youtube}
             target="_blank"
@@ -116,7 +116,7 @@ const related = content.filter((item) =>
     <!-- ACTIVIDAD RELACIONADA -->
     {
       related.length > 0 && (
-        <section class="mb-20">
+        <section class="section-related mb-20">
           <h2 class="font-heading text-2xl mb-6">Actividad en Santako Music</h2>
 
           <ul class="space-y-4">
@@ -138,7 +138,7 @@ const related = content.filter((item) =>
     }
 
     <!-- CTA BOOKING -->
-    <section class="p-10 bg-neutral-100 rounded-xl">
+    <section id="booking-cta" class="section-cta p-10 bg-neutral-100 rounded-xl">
       <h3 class="font-heading text-2xl mb-4">
         ¿Quieres programar a {person.data.title}?
       </h3>

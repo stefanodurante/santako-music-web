@@ -26,7 +26,7 @@ const related = content.filter((item) =>
 
 <BaseLayout title={event.data.title}>
   <!-- HERO -->
-  <header class="relative h-[60vh] min-h-[420px]">
+  <header id="evento-hero" class="section-hero relative h-[60vh] min-h-[420px]">
     <img
       src={event.data.image}
       alt={event.data.title}
@@ -46,8 +46,8 @@ const related = content.filter((item) =>
   </header>
 
   <!-- CONTENIDO -->
-  <main class="p-10 max-w-3xl">
-    <section>
+  <main id="evento-content" class="section-content p-10 max-w-3xl">
+    <section class="section-related">
       <h2 class="font-heading text-2xl mb-4">Artistas participantes</h2>
 
       <ul class="space-y-3">

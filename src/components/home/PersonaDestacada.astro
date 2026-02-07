@@ -5,29 +5,31 @@ import Tag from "../ui/Tag.astro";
 const featured = content.find((item) => item.type === "PERSONA");
 ---
 
-<section class="relative p-10 max-w-6xl">
-  <div class="grid md:grid-cols-2 gap-10 items-center">
-    <img
-      src={featured.data.image}
-      alt={featured.data.title}
-      class="w-full h-[420px] object-cover rounded-lg"
-    />
+{featured && (
+  <section id="artista-destacado" class="section-featured relative p-10 max-w-6xl">
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+      <img
+        src={featured.data.images?.[0]}
+        alt={featured.data.title}
+        class="w-full h-[420px] object-cover rounded-lg"
+      />
 
-    <div>
-      <Tag label="Artista destacado" variant="person" />
-      <h2 class="font-heading text-4xl mt-4">
-        {featured.data.title}
-      </h2>
-      <p class="mt-4 max-w-md">
-        {featured.data.bio}
-      </p>
+      <div>
+        <Tag label="Artista destacado" variant="person" />
+        <h2 class="font-heading text-4xl mt-4">
+          {featured.data.title}
+        </h2>
+        <p class="mt-4 max-w-md">
+          {featured.data.bio}
+        </p>
 
-      <a
-        href={`/persona/${featured.data.slug}`}
-        class="inline-block mt-6 underline"
-      >
-        Ver perfil
-      </a>
+        <a
+          href={`/persona/${featured.data.slug}`}
+          class="inline-block mt-6 underline"
+        >
+          Ver perfil
+        </a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+)}
