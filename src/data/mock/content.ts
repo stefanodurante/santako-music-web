@@ -54,6 +54,7 @@ export const content: ContentNode[] = [
         "/images/personas/motosierras-3.jpg",
       ],
       related: ["santako-live-sessions"],
+      showOnHome: true,
     },
   },
 
@@ -87,6 +88,7 @@ export const content: ContentNode[] = [
       instagram: "@srq_grup",
       images: ["/images/personas/sr-q-1.jpg"],
       related: ["santako-live-sessions"],
+      showOnHome: true,
     },
   },
 
@@ -107,6 +109,7 @@ export const content: ContentNode[] = [
         "/images/personas/dkorales-3.jpg",
       ],
       related: ["santako-live-sessions"],
+      showOnHome: true,
     },
   },
 
@@ -144,6 +147,7 @@ export const content: ContentNode[] = [
       youtube: "https://youtu.be/I7UTZF51TYA",
       images: ["/images/personas/daniel-higienico-1.jpg"],
       related: ["acoustic-nights"],
+      showOnHome: true,
     },
   },
 
@@ -168,6 +172,7 @@ export const content: ContentNode[] = [
       instagram: "@aptoparaconsumobcn",
       images: ["/images/personas/apto-para-consumo-1.jpg"],
       related: ["santako-live-sessions"],
+      showOnHome: true,
     },
   },
   {
@@ -183,6 +188,7 @@ export const content: ContentNode[] = [
       instagram: "@abp_365",
       images: ["/images/personas/dj-albert-b-1.jpg"],
       related: ["santako-live-sessions"],
+      showOnHome: true,
     },
   },
 
@@ -245,6 +251,7 @@ export const content: ContentNode[] = [
       isHero: true,
       heroPriority: 1,
       related: ["toni-dj", "motosierras", "sr-q", "dkorales", "dj-albert-b"],
+      showOnHome: true,
     },
   },
 
@@ -263,6 +270,7 @@ export const content: ContentNode[] = [
         "daniel-higienico",
         "los-hijos-de-james",
       ],
+      showOnHome: true,
     },
   },
   {
@@ -275,6 +283,7 @@ export const content: ContentNode[] = [
       date: "2025-04-30",
       images: ["/images/eventos/podcast-live-1.jpg"],
       related: ["daniel-higienico"],
+      showOnHome: true,
     },
   },
 
@@ -288,6 +297,7 @@ export const content: ContentNode[] = [
       date: "2025-04-18",
       images: ["/images/eventos/dj-session-1.jpg"],
       related: ["dj-albert-b"],
+      showOnHome: true,
     },
   },
   // ======================
@@ -312,6 +322,40 @@ export const content: ContentNode[] = [
       images: ["/images/eventos/podcast-live-1.jpg"],
 
       related: ["dj-albert-b", "daniel-higienico"],
+    },
+  },
+
+  // ======================
+  // ACTIVIDADES (Charlas, Talleres, Presentaciones)
+  // ======================
+  {
+    type: "ACTIVIDAD",
+    style: { size: "medium", color: "accent-event" },
+    data: {
+      title: "La rebelión de RadioActivas",
+      slug: "rebelion-radioactivas",
+      date: "2024-10-18",
+      label: "PRESENTACIÓN",
+      description:
+        "Radioactivas presentan REBELIÓN en una fiesta que tendrá lugar en Psycho Rock&Roll Club. Presentación de su nuevo disco con vinylo, videoclip, sorteos, merchan y mucho más.",
+      venue: "Psycho Rock&Roll Club, carrer de Piquer 27",
+      related: [],
+      showOnHome: true,
+    },
+  },
+
+  {
+    type: "ACTIVIDAD",
+    style: { size: "small", color: "accent-event" },
+    data: {
+      title: "Charla con Ferran Boutin: Santakomusic, Blues y Betis",
+      slug: "charla-ferran-boutin",
+      date: "2021-02-12",
+      label: "CHARLA",
+      description:
+        "Primera charla de la serie con socios de SantakoMusic. Ferran Boutin, presidente de la asociación, nos habla del nacimiento de SantakoMusic y de sus proyectos artísticos.",
+      externalUrl: "https://stereo.com/santakomusic",
+      related: [],
     },
   },
 ];

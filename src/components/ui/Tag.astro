@@ -1,7 +1,7 @@
 ---
 interface Props {
   label: string;
-  variant?: "event" | "person" | "live" | "podcast";
+  variant?: "event" | "person" | "live" | "podcast" | "actividad";
   floating?: boolean;
 }
 
@@ -12,6 +12,7 @@ const bgColor = {
   person: "var(--color-accent-person)",
   live: "var(--color-accent-live)",
   podcast: "var(--color-accent-podcast)",
+  actividad: "var(--color-accent-event)",
 }[variant];
 
 const textColor = variant === "live" ? "#000" : "#fff";

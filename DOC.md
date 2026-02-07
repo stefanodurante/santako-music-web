@@ -1,6 +1,6 @@
 # 📘 Santako Music · Web & Plataforma Cultural
 
-**Estado actual: MVP completo con integración WordPress**
+**Estado actual: MVP completo con integración WordPress + Deploy Netlify**
 
 ---
 
@@ -23,21 +23,23 @@ La navegación está diseñada bajo un principio fundamental:
 
 ## 2. Arquitectura de Rutas
 
-| Ruta                | Función                                     |
-| ------------------- | ------------------------------------------- |
-| `/`                 | Home editorial                              |
-| `/personas`         | Archivo de Personas (filtros + búsqueda)    |
-| `/persona/[slug]`   | Ficha individual (artista, banda, DJ, etc.) |
-| `/agenda`           | Agenda mensual                              |
-| `/agenda/[fecha]`   | Vista Día (editorial)                       |
-| `/evento/[slug]`    | Detalle de evento                           |
-| `/podcast`          | Archivo Podcast                             |
-| `/podcast/[slug]`   | Sesión mensual                              |
-| `/noticias`         | Noticias desde WordPress                    |
-| `/noticias/[slug]`  | Detalle de noticia                          |
-| `/legal/aviso-legal`| Aviso legal (desde WordPress)               |
-| `/legal/privacidad` | Política de privacidad (desde WordPress)    |
-| `/legal/cookies`    | Política de cookies (desde WordPress)       |
+| Ruta                  | Función                                     |
+| --------------------- | ------------------------------------------- |
+| `/`                   | Home editorial                              |
+| `/agenda`             | Agenda mensual                              |
+| `/agenda/[fecha]`     | Vista Día (editorial)                       |
+| `/evento/[slug]`      | Detalle de evento                           |
+| `/personas`           | Archivo de Personas (filtros + búsqueda)    |
+| `/persona/[slug]`     | Ficha individual (artista, banda, DJ, etc.) |
+| `/actividades`        | Charlas, talleres, presentaciones           |
+| `/actividad/[slug]`   | Detalle de actividad                        |
+| `/podcast`            | Archivo Podcast                             |
+| `/podcast/[slug]`     | Sesión mensual                              |
+| `/noticias`           | Noticias desde WordPress                    |
+| `/noticias/[slug]`    | Detalle de noticia                          |
+| `/legal/aviso-legal`  | Aviso legal (desde WordPress)               |
+| `/legal/privacidad`   | Política de privacidad (desde WordPress)    |
+| `/legal/cookies`      | Política de cookies (desde WordPress)       |
 
 ---
 
@@ -70,6 +72,7 @@ La navegación está diseñada bajo un principio fundamental:
 │   │   └── global.css      # Design system + variables
 │   └── types/
 │       └── content.ts      # TypeScript types
+├── netlify.toml            # Configuración Netlify
 └── package.json
 ```
 
@@ -127,7 +130,7 @@ Todas las secciones tienen `id` y `class` semánticas:
 ### 5.2 Navegación Desktop
 
 ```
-Agenda | Personas | Podcast
+Agenda | Personas | Actividades | Podcast
 ```
 
 ### 5.3 Navegación Mobile
@@ -147,7 +150,7 @@ Agenda | Personas | Podcast
 ### 6.1 Estructura (3 columnas)
 
 1. **Logo + descripción**
-2. **Navegación**: Agenda, Personas, Podcast, Contacto
+2. **Navegación**: Agenda, Personas, Actividades, Podcast, Contacto
 3. **Legal**: Aviso legal, Privacidad, Cookies
 
 ### 6.2 Subfooter
@@ -199,15 +202,18 @@ const page = await getPageBySlug("aviso-legal");
 
 ### 8.1 Tipos principales (ContentNode)
 
-- **PERSONA**: Artistas, bandas, DJs
-- **EVENTO**: Conciertos, sesiones
-- **PODCAST**: Sesiones mensuales
+| Tipo | Descripción | Página |
+|------|-------------|--------|
+| **PERSONA** | Artistas, bandas, DJs | `/personas` |
+| **EVENTO** | Conciertos, DJ sessions | `/agenda` |
+| **ACTIVIDAD** | Charlas, talleres, presentaciones | `/actividades` |
+| **PODCAST** | Sesiones mensuales | `/podcast` |
 
 ### 8.2 Estructura común
 
 ```typescript
 {
-  type: "PERSONA" | "EVENTO" | "PODCAST",
+  type: "PERSONA" | "EVENTO" | "PODCAST" | "ACTIVIDAD",
   data: { ... },      // Contenido real
   style: { ... }      // Solo frontend (size, etc.)
 }
@@ -226,6 +232,7 @@ const page = await getPageBySlug("aviso-legal");
   images?: string[];
   youtube?: string;
   related?: string[];
+  showOnHome?: boolean;
 }
 ```
 
@@ -243,40 +250,77 @@ const page = await getPageBySlug("aviso-legal");
   heroImage?: string;
   images?: string[];
   related: string[];
+  showOnHome?: boolean;
+}
+```
+
+### 8.5 ACTIVIDAD
+
+```typescript
+{
+  title: string;
+  slug: string;
+  date?: string;
+  label: "CHARLA" | "TALLER" | "PRESENTACIÓN";
+  description?: string;
+  venue?: string;           // Lugar
+  externalUrl?: string;     // Link externo
+  images?: string[];
+  related?: string[];
+  showOnHome?: boolean;
 }
 ```
 
 ---
 
-## 9. Comandos
+## 9. Deploy & Comandos
 
-| Comando           | Acción                                    |
-| :---------------- | :---------------------------------------- |
-| `npm install`     | Instala dependencias                      |
-| `npm run dev`     | Servidor local en `localhost:4321`        |
-| `npm run build`   | Build de producción en `./dist/`          |
-| `npm run preview` | Preview del build                         |
-| `npm run deploy`  | Push a main + deploy a Netlify (solo main)|
+### 9.1 Comandos disponibles
 
-### 9.1 Deploy a Producción
+| Comando              | Acción                                    |
+| :------------------- | :---------------------------------------- |
+| `npm install`        | Instala dependencias                      |
+| `npm run dev`        | Servidor local en `localhost:4321`        |
+| `npm run build`      | Build de producción en `./dist/`          |
+| `npm run preview`    | Preview del build                         |
+| `npm run deploy`     | Push a main (solo desde main)             |
+| `npm run deploy:preview` | Build + Deploy preview (URL temporal) |
+| `npm run deploy:prod`    | Build + Deploy producción             |
 
+### 9.2 Deploy con Netlify
+
+**Producción (automático):**
 ```bash
-npm run deploy
+git push origin main
+# Netlify detecta el push y despliega automáticamente
 ```
 
-**Requisitos:**
-- Estar en la rama `main`
-- Cambios commiteados
+**Preview (URL temporal):**
+```bash
+npm run build && netlify deploy --dir=dist
+```
 
-**Flujo:**
-1. Verifica que estás en `main`
-2. Push a origin/main
-3. Netlify detecta el push y despliega automáticamente
+**Producción (manual con CLI):**
+```bash
+npm run build && netlify deploy --dir=dist --prod
+```
 
-**Configuración Netlify** (`netlify.toml`):
-- Build: `npm run build`
-- Publish: `dist/`
-- Node: 20
+### 9.3 Configuración Netlify (`netlify.toml`)
+
+```toml
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+```
+
+### 9.4 URL de producción
+
+```
+https://santakomusicwb.netlify.app
+```
 
 ---
 
@@ -286,13 +330,26 @@ npm run deploy
 - **Tailwind CSS 4** - Estilos
 - **TypeScript** - Tipado estricto
 - **WordPress REST API** - CMS headless
+- **Netlify** - Hosting & Deploy
 
 ---
 
-## 11. Próximos Pasos
+## 11. Comandos Cursor
+
+| Dices | Acción |
+|-------|--------|
+| `/commit and merge` | Commit cambios y merge a main |
+| `/deploy` o `/push and deploy` | Push a main (requiere estar en main) |
+| `/preview` o `/deploy preview` | Build + URL temporal Netlify |
+| `/netlify prod` | Build + Deploy producción Netlify |
+
+---
+
+## 12. Próximos Pasos
 
 - [ ] Migrar todo el contenido mock a WordPress
-- [ ] Implementar Custom Post Types en WordPress (Personas, Eventos, Podcast)
+- [ ] Implementar Custom Post Types en WordPress (Personas, Eventos, Actividades, Podcast)
 - [ ] Añadir filtros y búsqueda en Personas
 - [ ] Sistema de caché para API de WordPress
 - [ ] Optimización de imágenes (Astro Image)
+- [ ] Dominio personalizado en Netlify

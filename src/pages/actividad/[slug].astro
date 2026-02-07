@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { content } from "../../data/mock/content";
+import Tag from "../../components/ui/Tag.astro";
+
+export function getStaticPaths() {
+  const actividades = content.filter((item) => item.type === "ACTIVIDAD");
+
+  return actividades.map((item) => ({
+    params: { slug: item.data.slug },
+    props: { actividad: item },
+  }));
+}
+
+const { actividad } = Astro.props;
+const { data } = actividad;
+---
+
+<BaseLayout title={`${data.title} · Santako Music`} mode="interior">
+  <article class="px-6 md:px-12 xl:px-24 py-24">
+    <div class="max-w-4xl mx-auto">
+
+      <!-- HEADER -->
+      <header class="mb-12">
+        <div class="flex items-center gap-4 mb-4">
+          <Tag label={data.label} variant="actividad" />
+          {data.date && (
+            <time class="text-sm uppercase tracking-widest opacity-60">
+              {new Date(data.date).toLocaleDateString("es-ES", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </time>
+          )}
+        </div>
+
+        <h1 class="font-heading text-4xl md:text-5xl mb-4">
+          {data.title}
+        </h1>
+
+        {data.venue && (
+          <p class="text-lg opacity-70">
+            📍 {data.venue}
+          </p>
+        )}
+      </header>
+
+      <!-- IMAGEN -->
+      {data.images?.[0] && (
+        <div class="aspect-video overflow-hidden rounded-lg mb-12">
+          <img
+            src={data.images[0]}
+            alt={data.title}
+            class="w-full h-full object-cover"
+          />
+        </div>
+      )}
+
+      <!-- CONTENIDO -->
+      {data.description && (
+        <div class="prose prose-lg max-w-none mb-12" style="color: var(--color-text);">
+          <p class="text-xl leading-relaxed">{data.description}</p>
+        </div>
+      )}
+
+      <!-- LINK EXTERNO -->
+      {data.externalUrl && (
+        <a
+          href={data.externalUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white transition hover:opacity-80"
+          style="background-color: var(--color-dark);"
+        >
+          Ver contenido externo
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
+      )}
+
+      <!-- FOOTER -->
+      <footer class="mt-16 pt-8 border-t border-black/10">
+        <a
+          href="/actividades"
+          class="text-sm uppercase tracking-widest border-b pb-1 hover:opacity-70 transition"
+          style="border-color: var(--color-text);"
+        >
+          ← Volver a actividades
+        </a>
+      </footer>
+
+    </div>
+  </article>
+</BaseLayout>

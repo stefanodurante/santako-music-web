@@ -1,4 +1,4 @@
-export type ContentType = "EVENTO" | "PERSONA" | "PODCAST";
+export type ContentType = "EVENTO" | "PERSONA" | "PODCAST" | "ACTIVIDAD";
 
 /** Supported image formats */
 export type ImagePath = `${string}.${"jpg" | "jpeg" | "png" | "webp"}`;
@@ -31,6 +31,9 @@ export type PersonaData = {
   images: ImagePath[];
 
   related?: string[];
+
+  /** Mostrar en la home (Archivo Vivo) */
+  showOnHome?: boolean;
 };
 
 /**
@@ -49,6 +52,9 @@ export type EventoData = {
   isHero?: boolean;
   heroPriority?: number;
   related?: string[];
+
+  /** Mostrar en la home (Archivo Vivo) */
+  showOnHome?: boolean;
 };
 
 /**
@@ -69,6 +75,39 @@ export type PodcastData = {
   images?: ImagePath[];
 
   related?: string[];
+
+  /** Mostrar en la home (Archivo Vivo) */
+  showOnHome?: boolean;
+};
+
+/**
+ * ACTIVIDAD (Charla, Taller, Presentación)
+ */
+export type ActividadLabel = "CHARLA" | "TALLER" | "PRESENTACIÓN";
+
+export type ActividadData = {
+  title: string;
+  slug: string;
+  date?: string;
+
+  /** Tipo de actividad */
+  label: ActividadLabel;
+
+  /** Descripción breve */
+  description?: string;
+
+  /** Lugar del evento */
+  venue?: string;
+
+  images?: ImagePath[];
+
+  /** Link externo (audio, video, etc.) */
+  externalUrl?: string;
+
+  related?: string[];
+
+  /** Mostrar en la home (Archivo Vivo) */
+  showOnHome?: boolean;
 };
 
 /**
@@ -89,4 +128,9 @@ export type ContentNode =
       type: "PODCAST";
       style?: ContentStyle;
       data: PodcastData;
+    }
+  | {
+      type: "ACTIVIDAD";
+      style?: ContentStyle;
+      data: ActividadData;
     };

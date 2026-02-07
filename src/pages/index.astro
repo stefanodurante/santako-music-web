@@ -9,6 +9,38 @@ import ActivityGrid from "../components/grid/ActivityGrid.astro";
 import ContactBlock from "../components/home/ContactBlock.astro";
 
 import { content } from "../data/mock/content";
+
+/**
+ * ARCHIVO VIVO - HOME
+ * Máximo 6 personas + 4 eventos/actividades
+ */
+const MAX_PERSONAS = 6;
+const MAX_EVENTOS = 4;
+
+const personasHome = content
+  .filter((item) => item.type === "PERSONA" && item.data.showOnHome)
+  .slice(0, MAX_PERSONAS);
+
+// Eventos + Actividades juntos (conciertos, charlas, talleres, presentaciones)
+const eventosYActividades = content
+  .filter((item) => 
+    (item.type === "EVENTO" || item.type === "ACTIVIDAD") && 
+    item.data.showOnHome
+  )
+  .slice(0, MAX_EVENTOS);
+
+// Si hay menos de 6 personas, añadir más eventos/actividades
+const espacioExtra = MAX_PERSONAS - personasHome.length;
+const extraItems = espacioExtra > 0
+  ? content
+      .filter((item) => 
+        (item.type === "EVENTO" || item.type === "ACTIVIDAD") && 
+        item.data.showOnHome
+      )
+      .slice(MAX_EVENTOS, MAX_EVENTOS + espacioExtra)
+  : [];
+
+const archivoVivoItems = [...personasHome, ...eventosYActividades, ...extraItems];
 ---
 
 <BaseLayout>
@@ -25,10 +57,12 @@ import { content } from "../data/mock/content";
   <PodcastBlock />
 
   <!-- ARCHIVO VIVO -->
-  <section id="archivo" class="section-archive px-6 md:px-12 xl:px-24 py-24 container-wide">
-    <h2 class="font-heading text-4xl mb-6">Archivo Vivo</h2>
+  <section id="archivo" class="section-archive px-6 md:px-12 xl:px-24 py-24">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="font-heading text-4xl mb-8">Archivo Vivo</h2>
 
-    <ActivityGrid items={content} />
+      <ActivityGrid items={archivoVivoItems} />
+    </div>
   </section>
 
   <!-- CTA INSTITUCIONAL -->

@@ -9,14 +9,13 @@ interface Props {
 
 const { items } = Astro.props as Props;
 
-const getVariant = (item: ContentNode) =>
-  item.type === "PERSONA"
-    ? "person"
-    : item.type === "PODCAST"
-      ? "podcast"
-      : item.data.isLive
-        ? "live"
-        : "event";
+const getVariant = (item: ContentNode) => {
+  if (item.type === "PERSONA") return "person";
+  if (item.type === "PODCAST") return "podcast";
+  if (item.type === "ACTIVIDAD") return "actividad";
+  if (item.type === "EVENTO" && item.data.isLive) return "live";
+  return "event";
+};
 ---
 
 <section class="section-grid grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[180px] md:auto-rows-[200px]">
@@ -42,7 +41,7 @@ const getVariant = (item: ContentNode) =>
             {/* CONTENIDO */}
             <div class="relative h-full p-5 flex flex-col justify-end text-white">
               <Tag
-                label={item.data.label ?? item.type}
+                label={"label" in item.data && item.data.label ? item.data.label : item.type}
                 variant={getVariant(item)}
                 floating
               />
@@ -51,7 +50,7 @@ const getVariant = (item: ContentNode) =>
                 {item.data.title}
               </h3>
 
-              {item.data.date && (
+              {"date" in item.data && item.data.date && (
                 <p class="text-sm opacity-70 mt-1">{item.data.date}</p>
               )}
             </div>
