@@ -250,12 +250,33 @@ const page = await getPageBySlug("aviso-legal");
 
 ## 9. Comandos
 
-| Comando           | Acción                              |
-| :---------------- | :---------------------------------- |
-| `npm install`     | Instala dependencias                |
-| `npm run dev`     | Servidor local en `localhost:4321`  |
-| `npm run build`   | Build de producción en `./dist/`    |
-| `npm run preview` | Preview del build                   |
+| Comando           | Acción                                    |
+| :---------------- | :---------------------------------------- |
+| `npm install`     | Instala dependencias                      |
+| `npm run dev`     | Servidor local en `localhost:4321`        |
+| `npm run build`   | Build de producción en `./dist/`          |
+| `npm run preview` | Preview del build                         |
+| `npm run deploy`  | Push a main + deploy a Netlify (solo main)|
+
+### 9.1 Deploy a Producción
+
+```bash
+npm run deploy
+```
+
+**Requisitos:**
+- Estar en la rama `main`
+- Cambios commiteados
+
+**Flujo:**
+1. Verifica que estás en `main`
+2. Push a origin/main
+3. Netlify detecta el push y despliega automáticamente
+
+**Configuración Netlify** (`netlify.toml`):
+- Build: `npm run build`
+- Publish: `dist/`
+- Node: 20
 
 ---
 
