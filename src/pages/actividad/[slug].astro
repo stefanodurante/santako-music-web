@@ -48,15 +48,14 @@ const { data } = actividad;
       </header>
 
       <!-- IMAGEN -->
-      {data.images?.[0] && (
-        <div class="aspect-video overflow-hidden rounded-lg mb-12">
-          <img
-            src={data.images[0]}
-            alt={data.title}
-            class="w-full h-full object-cover"
-          />
-        </div>
-      )}
+      <div class="aspect-video overflow-hidden rounded-lg mb-12 bg-neutral-100">
+        <img
+          src={data.images?.[0] || "/images/placeholder.svg"}
+          alt={data.title}
+          class="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
 
       <!-- CONTENIDO -->
       {data.description && (

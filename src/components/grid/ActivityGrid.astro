@@ -41,20 +41,18 @@ const getSize = (item: ContentNode, index: number): "small" | "medium" | "large"
 <section class="section-grid grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[180px] md:auto-rows-[200px]">
   {
     items.map((item, index) => {
-      const image = item.data.images?.[0];
+      const image = item.data.images?.[0] || "/images/placeholder.svg";
 
       return (
         <Card size={getSize(item, index)}>
           <div class="group relative h-full overflow-hidden">
             {/* IMAGEN */}
-            {image && (
-              <img
-                src={image}
-                alt={item.data.title}
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                loading="lazy"
-              />
-            )}
+            <img
+              src={image}
+              alt={item.data.title}
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+            />
 
             {/* OVERLAY */}
             <div class="absolute inset-0 bg-black/40" />

@@ -1,7 +1,7 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import AgendaFilters from "../../components/agenda/AgendaFilters.astro";
-import { content } from "../../data/mock/content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import AgendaFilters from "../../../components/agenda/AgendaFilters.astro";
+import { content } from "../../../data/mock/content";
 
 /**
  * MESES DISPONIBLES
@@ -16,9 +16,24 @@ const months = [
 
 const year = 2026;
 
-// Mes actual por defecto: Febrero (índice 1)
-const currentMonthIndex = 1;
-const currentMonth = months[currentMonthIndex];
+/**
+ * RUTAS ESTÁTICAS
+ */
+export function getStaticPaths() {
+  return [
+    { params: { mes: "enero" } },
+    { params: { mes: "febrero" } },
+    { params: { mes: "marzo" } },
+    { params: { mes: "abril" } },
+    { params: { mes: "mayo" } },
+  ];
+}
+
+const { mes } = Astro.params;
+
+// Encontrar mes actual
+const currentMonthIndex = months.findIndex((m) => m.slug === mes);
+const currentMonth = months[currentMonthIndex] || months[1]; // Febrero por defecto
 
 /**
  * FECHAS
@@ -59,24 +74,12 @@ const isPast = (date: string) => {
   return new Date(date) < new Date(today);
 };
 
-const getDayImage = (items: typeof agendaItems) => {
-  const withImages = items.filter(
-    (item) => "images" in item.data && item.data.images && item.data.images.length > 0
-  );
-
-  if (withImages.length > 0) {
-    return withImages[0].data.images![0];
-  }
-
-  return "/images/placeholder-agenda.jpg";
-};
-
 // Navegación meses
 const prevMonth = currentMonthIndex > 0 ? months[currentMonthIndex - 1] : null;
 const nextMonth = currentMonthIndex < months.length - 1 ? months[currentMonthIndex + 1] : null;
 ---
 
-<BaseLayout title="Agenda · Santako Music">
+<BaseLayout title={`Agenda ${currentMonth.name} ${year} · Santako Music`}>
 
   <section id="agenda" class="section-agenda px-6 md:px-12 xl:px-24 py-24">
     <div class="max-w-6xl mx-auto">

@@ -1,0 +1,43 @@
+---
+interface Props {
+  currentFilter?: string;
+}
+
+const { currentFilter = "all" } = Astro.props;
+
+const filters = [
+  { id: "all", label: "Todos" },
+  { id: "concierto", label: "Conciertos" },
+  { id: "dj", label: "DJ Sets" },
+  { id: "jam", label: "Jam Sessions" },
+  { id: "podcast", label: "Podcasts" },
+  { id: "actividad", label: "Actividades" },
+];
+---
+
+<div class="flex flex-wrap gap-2">
+  {filters.map((filter) => (
+    <button
+      data-filter={filter.id}
+      class={`agenda-filter px-3 py-1.5 text-xs uppercase tracking-widest rounded-full border transition
+        ${currentFilter === filter.id 
+          ? "bg-black text-white border-black" 
+          : "bg-white border-black/20 hover:border-black/40"
+        }`}
+    >
+      {filter.label}
+    </button>
+  ))}
+</div>
+
+<script>
+  // Client-side filtering (para futuras implementaciones)
+  document.querySelectorAll('.agenda-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+      // Aquí se puede implementar filtrado client-side
+      // o redirigir a una URL con query param
+      console.log('Filter selected:', filter);
+    });
+  });
+</script>

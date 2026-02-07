@@ -216,10 +216,34 @@ export const content: ContentNode[] = [
   },
 
   // ======================
-  // EVENTOS (FAKE, COHERENTES)
+  // EVENTOS 2026 (Enero - Mayo)
   // ======================
 
-  // 🔥 EVENTO HERO ACTUAL - Febrero 2026
+  // ========== ENERO 2026 ==========
+  {
+    type: "EVENTO",
+    data: {
+      title: "Jam Session Año Nuevo",
+      slug: "jam-session-ano-nuevo-2026",
+      label: "JAM SESSION",
+      date: "2026-01-11",
+      images: ["/images/eventos/jam-sistere-1.jpg"],
+      related: ["motosierras", "dkorales"],
+    },
+  },
+  {
+    type: "EVENTO",
+    data: {
+      title: "Acoustic Nights · Enero",
+      slug: "acoustic-nights-enero-2026",
+      label: "CONCIERTO",
+      date: "2026-01-25",
+      images: ["/images/eventos/event-1.jpg"],
+      related: ["daniel-higienico", "paco-xavi"],
+    },
+  },
+
+  // ========== FEBRERO 2026 ==========
   {
     type: "EVENTO",
     data: {
@@ -227,71 +251,195 @@ export const content: ContentNode[] = [
       slug: "nit-de-blues-psycho-club-2026",
       label: "CONCIERTO",
       date: "2026-02-14",
-
       images: ["/images/eventos/jam-sistere-1.jpg"],
       heroImage: "/images/eventos/jam-sistere-1.jpg",
-
       isHero: true,
       heroPriority: 1,
-
       related: ["daniel-higienico", "dkorales"],
     },
   },
   {
     type: "EVENTO",
     data: {
-      title: "Santako Live Sessions",
+      title: "DJ Session · San Valentín",
+      slug: "dj-session-san-valentin-2026",
+      label: "DJ SET",
+      date: "2026-02-14",
+      images: ["/images/eventos/dj-session-1.jpg"],
+      related: ["dj-albert-b", "toni-dj"],
+    },
+  },
+  {
+    type: "EVENTO",
+    data: {
+      title: "Santako Live Sessions · Febrero",
+      slug: "santako-live-sessions-febrero-2026",
       label: "CONCIERTO",
-      slug: "santako-live-sessions",
-      date: "2025-06-14",
-      images: [
-        "/images/eventos/event-1.jpg",
-      ],
-      related: ["toni-dj", "motosierras", "sr-q", "dkorales", "dj-albert-b"],
+      date: "2026-02-21",
+      images: ["/images/eventos/event-1.jpg"],
+      related: ["motosierras", "sr-q"],
       showOnHome: true,
+    },
+  },
+  {
+    type: "EVENTO",
+    data: {
+      title: "Raps Koma · Batalla de Gallos",
+      slug: "raps-koma-febrero-2026",
+      label: "HIP HOP",
+      date: "2026-02-28",
+      images: ["/images/eventos/raps-koma-1.jpg"],
+      related: ["marko-fontana"],
     },
   },
 
+  // ========== MARZO 2026 ==========
   {
     type: "EVENTO",
     data: {
-      title: "Acoustic Nights",
+      title: "Acoustic Nights · Marzo",
+      slug: "acoustic-nights-marzo-2026",
       label: "CONCIERTO",
-      slug: "acoustic-nights",
-      date: "2025-05-30",
+      date: "2026-03-07",
       images: ["/images/eventos/event-1.jpg"],
-      related: [
-        "famous-monsters",
-        "paco-xavi",
-        "daniel-higienico",
-        "los-hijos-de-james",
-      ],
-      showOnHome: true,
+      related: ["apto-para-consumo"],
     },
   },
   {
     type: "EVENTO",
     data: {
-      title: "Podcast Santako Live · Escena Local",
-      slug: "podcast-santako-live-escena-local",
-      label: "Podcast en directo",
-      date: "2025-04-30",
+      title: "Jam Session · Psycho Club",
+      slug: "jam-session-marzo-2026",
+      label: "JAM SESSION",
+      date: "2026-03-14",
+      images: ["/images/eventos/jam-sistere-1.jpg"],
+      related: ["dkorales", "malas-formas"],
+    },
+  },
+  {
+    type: "EVENTO",
+    data: {
+      title: "DJ Session · Equinoccio",
+      slug: "dj-session-equinoccio-2026",
+      label: "DJ SET",
+      date: "2026-03-21",
+      images: ["/images/eventos/dj-session-1.jpg"],
+      related: ["dj-albert-b"],
+    },
+  },
+  {
+    type: "EVENTO",
+    data: {
+      title: "Santako Live Sessions · Marzo",
+      slug: "santako-live-sessions-marzo-2026",
+      label: "CONCIERTO",
+      date: "2026-03-28",
+      images: ["/images/eventos/event-1.jpg"],
+      related: ["eltoni-elpako-elaitor"],
+    },
+  },
+
+  // ========== ABRIL 2026 ==========
+  {
+    type: "EVENTO",
+    data: {
+      title: "Podcast Santako Live · Abril",
+      slug: "podcast-santako-live-abril-2026",
+      label: "PODCAST EN DIRECTO",
+      date: "2026-04-04",
       images: ["/images/eventos/podcast-live-1.jpg"],
       related: ["daniel-higienico"],
+    },
+  },
+  {
+    type: "EVENTO",
+    data: {
+      title: "Acoustic Nights · Abril",
+      slug: "acoustic-nights-abril-2026",
+      label: "CONCIERTO",
+      date: "2026-04-11",
+      images: ["/images/eventos/event-1.jpg"],
+      related: ["paco-xavi"],
+    },
+  },
+  {
+    type: "EVENTO",
+    data: {
+      title: "Raps Koma · Spring Edition",
+      slug: "raps-koma-abril-2026",
+      label: "HIP HOP",
+      date: "2026-04-18",
+      images: ["/images/eventos/raps-koma-1.jpg"],
+      related: ["marko-fontana"],
+    },
+  },
+  {
+    type: "EVENTO",
+    data: {
+      title: "Santako Live Sessions · Abril",
+      slug: "santako-live-sessions-abril-2026",
+      label: "CONCIERTO",
+      date: "2026-04-25",
+      images: ["/images/eventos/event-1.jpg"],
+      related: ["motosierras", "sr-q", "dkorales"],
       showOnHome: true,
     },
   },
 
+  // ========== MAYO 2026 ==========
+  {
+    type: "EVENTO",
+    data: {
+      title: "Jam Session · Primavera",
+      slug: "jam-session-mayo-2026",
+      label: "JAM SESSION",
+      date: "2026-05-02",
+      images: ["/images/eventos/jam-sistere-1.jpg"],
+      related: ["dkorales"],
+    },
+  },
+  {
+    type: "EVENTO",
+    data: {
+      title: "Acoustic Nights · Mayo",
+      slug: "acoustic-nights-mayo-2026",
+      label: "CONCIERTO",
+      date: "2026-05-09",
+      images: ["/images/eventos/event-1.jpg"],
+      related: ["daniel-higienico", "apto-para-consumo"],
+    },
+  },
   {
     type: "EVENTO",
     data: {
       title: "DJ Session · Santako Nights",
-      slug: "dj-session-santako-nights",
-      label: "DJ Set",
-      date: "2025-04-18",
+      slug: "dj-session-mayo-2026",
+      label: "DJ SET",
+      date: "2026-05-16",
       images: ["/images/eventos/dj-session-1.jpg"],
-      related: ["dj-albert-b"],
-      showOnHome: true,
+      related: ["dj-albert-b", "toni-dj"],
+    },
+  },
+  {
+    type: "EVENTO",
+    data: {
+      title: "Santako Live Sessions · Mayo",
+      slug: "santako-live-sessions-mayo-2026",
+      label: "CONCIERTO",
+      date: "2026-05-23",
+      images: ["/images/eventos/event-1.jpg"],
+      related: ["motosierras", "malas-formas"],
+    },
+  },
+  {
+    type: "EVENTO",
+    data: {
+      title: "Fiesta Cierre Temporada",
+      slug: "fiesta-cierre-temporada-2026",
+      label: "FESTIVAL",
+      date: "2026-05-30",
+      images: ["/images/eventos/event-1.jpg"],
+      related: ["toni-dj", "dj-albert-b", "motosierras", "sr-q"],
     },
   },
   // ======================

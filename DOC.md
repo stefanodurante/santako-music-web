@@ -26,15 +26,17 @@ La navegación está diseñada bajo un principio fundamental:
 | Ruta                  | Función                                     |
 | --------------------- | ------------------------------------------- |
 | `/`                   | Home editorial                              |
-| `/agenda`             | Agenda mensual                              |
+| `/agenda`             | Agenda mensual (Febrero 2026 por defecto)   |
+| `/agenda/mes/[mes]`   | Agenda por mes (enero, febrero, marzo...)   |
 | `/agenda/[fecha]`     | Vista Día (editorial)                       |
 | `/evento/[slug]`      | Detalle de evento                           |
 | `/personas`           | Archivo de Personas (filtros + búsqueda)    |
 | `/persona/[slug]`     | Ficha individual (artista, banda, DJ, etc.) |
 | `/actividades`        | Charlas, talleres, presentaciones           |
 | `/actividad/[slug]`   | Detalle de actividad                        |
-| `/podcast`            | Archivo Podcast                             |
-| `/podcast/[slug]`     | Sesión mensual                              |
+| `/podcast`            | Archivo Podcasts (2 grupos)                 |
+| `/podcast/[slug]`     | Sesión con video embebido                   |
+| `/contacto`           | Página de contacto                          |
 | `/noticias`           | Noticias desde WordPress                    |
 | `/noticias/[slug]`    | Detalle de noticia                          |
 | `/legal/aviso-legal`  | Aviso legal (desde WordPress)               |
@@ -54,7 +56,7 @@ La navegación está diseñada bajo un principio fundamental:
 │   └── logo/
 ├── src/
 │   ├── components/
-│   │   ├── agenda/         # AgendaHome
+│   │   ├── agenda/         # AgendaHome, AgendaFilters
 │   │   ├── grid/           # ActivityGrid
 │   │   ├── home/           # HeroEditorial, PodcastBlock, PersonaDestacada, ContactBlock
 │   │   ├── layout/         # Header, Footer

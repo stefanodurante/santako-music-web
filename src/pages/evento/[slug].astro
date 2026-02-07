@@ -28,9 +28,10 @@ const related = content.filter((item) =>
   <!-- HERO -->
   <header id="evento-hero" class="section-hero relative h-[60vh] min-h-[420px]">
     <img
-      src={event.data.image}
+      src={event.data.images?.[0] || "/images/placeholder.svg"}
       alt={event.data.title}
       class="absolute inset-0 w-full h-full object-cover"
+      loading="eager"
     />
     <div class="absolute inset-0 bg-black/50"></div>
 
