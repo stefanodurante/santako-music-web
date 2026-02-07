@@ -19,7 +19,7 @@ const getVariant = (item: ContentNode) =>
         : "event";
 ---
 
-<section class="section-grid grid grid-cols-4 gap-6 auto-rows-[200px]">
+<section class="section-grid grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[180px] md:auto-rows-[200px]">
   {
     items.map((item) => {
       const image = item.data.images?.[0];

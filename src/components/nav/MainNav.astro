@@ -1,21 +1,149 @@
 ---
-// Solo los links de navegación - el logo está en Header.astro
+import LogoEditorial from "../ui/LogoEditorial.astro";
+
+const navItems = [
+  { href: "/agenda", label: "Agenda", color: "--color-accent-event" },
+  { href: "/personas", label: "Personas", color: "--color-accent-person" },
+  { href: "/podcast", label: "Podcast", color: "--color-accent-live" },
+];
 ---
 
-<nav class="hidden md:flex gap-10 text-xs uppercase tracking-widest">
-  <a href="/agenda" class="hover:text-[--color-accent-event] transition">
-    Agenda
-  </a>
-  <a href="/personas" class="hover:text-[--color-accent-person] transition">
-    Personas
-  </a>
-  <a href="/podcast" class="hover:text-[--color-accent-podcast] transition">
-    Podcast
-  </a>
-  <a
-    href="/contacto"
-    class="text-[--color-accent-event] font-bold underline underline-offset-4 italic"
-  >
-    Booking
-  </a>
+<!-- NAV DESKTOP -->
+<nav id="nav-desktop" class="hidden md:block">
+  <ul class="flex gap-10 text-xs uppercase tracking-widest">
+    {navItems.map((item) => (
+      <li>
+        <a 
+          href={item.href} 
+          class="hover:opacity-70 transition"
+        >
+          {item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
 </nav>
+
+<!-- HAMBURGER BUTTON (MOBILE) -->
+<button
+  id="nav-toggle"
+  type="button"
+  class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5"
+  aria-label="Abrir menú"
+  aria-expanded="false"
+>
+  <span class="nav-line w-6 h-0.5 bg-current transition-all duration-300"></span>
+  <span class="nav-line w-6 h-0.5 bg-current transition-all duration-300"></span>
+  <span class="nav-line w-6 h-0.5 bg-current transition-all duration-300"></span>
+</button>
+
+<!-- OVERLAY (MOBILE) -->
+<div
+  id="nav-overlay"
+  class="fixed inset-0 z-[99999] bg-black/50
+         opacity-0 pointer-events-none
+         transition-opacity duration-300 md:hidden"
+></div>
+
+<!-- NAV MOBILE (SLIDE PANEL) -->
+<nav
+  id="nav-mobile"
+  class="fixed inset-y-0 right-0 w-[98%] h-screen z-[100000]
+         flex flex-col items-start
+         py-6 px-8
+         translate-x-full
+         transition-transform duration-300 md:hidden
+         shadow-2xl"
+  style="background-color: #F6F6F4 !important;"
+>
+  <!-- LOGO -->
+  <div style="color: var(--color-text);">
+    <LogoEditorial />
+  </div>
+
+  <!-- LINKS -->
+  <ul class="flex flex-col gap-6 mt-12" style="color: var(--color-text);">
+    {navItems.map((item) => (
+      <li>
+        <a
+          href={item.href}
+          class="font-heading text-4xl hover:opacity-70 transition"
+        >
+          {item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <!-- CONTACT + LEGAL -->
+  <div class="mt-auto mb-8" style="color: var(--color-text);">
+    <a
+      href="mailto:hola@santakomusic.com"
+      class="text-sm uppercase tracking-widest border-b pb-1 hover:opacity-70 transition inline-block mb-6"
+      style="border-color: var(--color-text);"
+    >
+      Contacto
+    </a>
+
+    <ul class="flex flex-wrap gap-x-4 gap-y-2 text-xs opacity-50">
+      <li><a href="/legal/aviso-legal" class="hover:opacity-70 transition">Aviso legal</a></li>
+      <li><a href="/legal/privacidad" class="hover:opacity-70 transition">Privacidad</a></li>
+      <li><a href="/legal/cookies" class="hover:opacity-70 transition">Cookies</a></li>
+    </ul>
+  </div>
+
+  <!-- CLOSE BUTTON -->
+  <button
+    id="nav-close"
+    type="button"
+    class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center"
+    style="color: var(--color-text);"
+    aria-label="Cerrar menú"
+  >
+    <span class="sr-only">Cerrar</span>
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+</nav>
+
+<script>
+  const toggle = document.getElementById("nav-toggle");
+  const close = document.getElementById("nav-close");
+  const mobileNav = document.getElementById("nav-mobile");
+  const overlay = document.getElementById("nav-overlay");
+
+  function openMenu() {
+    // Mostrar menú
+    mobileNav?.classList.remove("translate-x-full");
+    mobileNav?.classList.add("translate-x-0");
+    overlay?.classList.remove("opacity-0", "pointer-events-none");
+    overlay?.classList.add("opacity-100", "pointer-events-auto");
+    toggle?.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMenu() {
+    // Ocultar menú
+    mobileNav?.classList.add("translate-x-full");
+    mobileNav?.classList.remove("translate-x-0");
+    overlay?.classList.add("opacity-0", "pointer-events-none");
+    overlay?.classList.remove("opacity-100", "pointer-events-auto");
+    toggle?.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+
+  toggle?.addEventListener("click", openMenu);
+  close?.addEventListener("click", closeMenu);
+  overlay?.addEventListener("click", closeMenu);
+
+  // Cerrar con ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+
+  // Cerrar al hacer click en un link
+  mobileNav?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+</script>
