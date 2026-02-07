@@ -3,47 +3,43 @@ import LogoEditorial from "../ui/LogoEditorial.astro";
 ---
 
 <footer id="footer" class="section-footer mt-24" style="background-color: var(--color-dark); color: white;">
-  <div
-    class="max-w-7xl mx-auto px-6 md:px-12 xl:px-24 py-16 grid grid-cols-1 md:grid-cols-3 gap-12"
-  >
-    <!-- BLOQUE 1: LOGO + DESCRIPCIÓN -->
-    <div>
-      <div class="mb-6">
-        <LogoEditorial size="md" />
+  <div class="max-w-7xl mx-auto px-6 md:px-12 xl:px-24 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <!-- BLOQUE 1: LOGO + DESCRIPCIÓN -->
+      <div>
+        <div class="mb-6">
+          <LogoEditorial size="md" />
+        </div>
+        <p class="text-sm text-white/60 max-w-xs">
+          Asociación de músicos de Santa Coloma de Gramenet. Plataforma cultural dedicada a la música en vivo y la actividad creativa.
+        </p>
       </div>
-      <p class="text-sm text-white/60 max-w-xs">
-        Asociación de músicos de Santa Coloma de Gramenet. Plataforma cultural dedicada a la música en vivo y la actividad creativa.
-      </p>
-    </div>
 
-    <!-- BLOQUE 2: NAVEGACIÓN -->
-    <div>
-      <h3 class="text-xs uppercase tracking-widest text-white/40 mb-4">Navegación</h3>
-      <ul class="space-y-3 text-sm">
-        <li><a href="/agenda" class="hover:text-white/70 transition">Agenda</a></li>
-        <li><a href="/personas" class="hover:text-white/70 transition">Personas</a></li>
-        <li><a href="/actividades" class="hover:text-white/70 transition">Actividades</a></li>
-        <li><a href="/podcast" class="hover:text-white/70 transition">Podcast</a></li>
-        <li><a href="mailto:hola@santakomusic.com" class="hover:text-white/70 transition">Contacto</a></li>
-      </ul>
-    </div>
+      <!-- BLOQUE 2: NAVEGACIÓN -->
+      <div>
+        <ul class="space-y-3 text-sm">
+          <li><a href="/agenda" class="hover:text-white/70 transition">Agenda</a></li>
+          <li><a href="/personas" class="hover:text-white/70 transition">Personas</a></li>
+          <li><a href="/actividades" class="hover:text-white/70 transition">Actividades</a></li>
+          <li><a href="/podcast" class="hover:text-white/70 transition">Podcasts</a></li>
+          <li><a href="/contacto" class="hover:text-white/70 transition">Contacto</a></li>
+        </ul>
+      </div>
 
-    <!-- BLOQUE 3: LEGAL -->
-    <div>
-      <h3 class="text-xs uppercase tracking-widest text-white/40 mb-4">Legal</h3>
-      <ul class="space-y-3 text-sm text-white/60">
-        <li><a href="/legal/aviso-legal" class="hover:text-white transition">Aviso legal</a></li>
-        <li><a href="/legal/privacidad" class="hover:text-white transition">Política de privacidad</a></li>
-        <li><a href="/legal/cookies" class="hover:text-white transition">Política de cookies</a></li>
-      </ul>
+      <!-- BLOQUE 3: LEGAL -->
+      <div class="md:justify-self-end">
+        <ul class="space-y-3 text-sm text-white/60">
+          <li><a href="/legal/aviso-legal" class="hover:text-white transition">Aviso legal</a></li>
+          <li><a href="/legal/privacidad" class="hover:text-white transition">Política de privacidad</a></li>
+          <li><a href="/legal/cookies" class="hover:text-white transition">Política de cookies</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 
   <!-- SUBFOOTER -->
-  <div 
-    class="border-t border-white/10 px-6 md:px-12 xl:px-24 py-6"
-  >
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+  <div class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 xl:px-24 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
       <!-- COPYRIGHT -->
       <p class="text-xs text-white/40">
         © {new Date().getFullYear()} Santako Music · Santa Coloma de Gramenet

@@ -54,13 +54,13 @@ La navegación está diseñada bajo un principio fundamental:
 │   └── logo/
 ├── src/
 │   ├── components/
-│   │   ├── agenda/         # AgendaHome, AgendaList, CalendarMonth
+│   │   ├── agenda/         # AgendaHome
 │   │   ├── grid/           # ActivityGrid
-│   │   ├── home/           # HeroEditorial, PodcastBlock, PersonaDestacada
+│   │   ├── home/           # HeroEditorial, PodcastBlock, PersonaDestacada, ContactBlock
 │   │   ├── layout/         # Header, Footer
 │   │   ├── nav/            # MainNav (desktop + mobile)
 │   │   ├── personas/       # PersonasGrid
-│   │   └── ui/             # Button, Card, Tag, Logo, CTAButton
+│   │   └── ui/             # Button, Card, Tag, CTAButton, LogoEditorial, LogoImage
 │   ├── data/
 │   │   └── mock/           # content.ts (datos temporales)
 │   ├── layouts/
@@ -150,8 +150,8 @@ Agenda | Personas | Actividades | Podcast
 ### 6.1 Estructura (3 columnas)
 
 1. **Logo + descripción**
-2. **Navegación**: Agenda, Personas, Actividades, Podcast, Contacto
-3. **Legal**: Aviso legal, Privacidad, Cookies
+2. **Navegación**: Agenda, Personas, Actividades, Podcasts, Contacto
+3. **Legal** (alineado derecha): Aviso legal, Privacidad, Cookies
 
 ### 6.2 Subfooter
 
@@ -160,7 +160,38 @@ Agenda | Personas | Actividades | Podcast
 
 ---
 
-## 7. Integración WordPress
+## 7. Página de Podcasts
+
+La página `/podcast` muestra dos grupos de podcasts:
+
+### 7.1 Podcast Santako (oficial)
+- Grid con miniaturas (3 columnas)
+- Canal: `@santakomusic`
+
+### 7.2 Clandestino Club Social
+- Lista con descripción
+- Canal: `@Clavoardiendovideo`
+- Presentado por Marko Fontana
+
+---
+
+## 8. Página de Contacto
+
+### 8.1 Secciones
+
+1. **Colaboraciones**: Programación cultural
+2. **Hazte Socio**: Info para nuevos socios
+
+### 8.2 Redes Sociales
+- Instagram
+- YouTube
+
+### 8.3 Ubicación
+- Santa Coloma de Gramenet, Barcelona
+
+---
+
+## 9. Integración WordPress
 
 ### 7.1 Cliente API (`src/lib/wordpress.ts`)
 
@@ -198,9 +229,9 @@ const page = await getPageBySlug("aviso-legal");
 
 ---
 
-## 8. Modelo de Contenido
+## 10. Modelo de Contenido
 
-### 8.1 Tipos principales (ContentNode)
+### 10.1 Tipos principales (ContentNode)
 
 | Tipo | Descripción | Página |
 |------|-------------|--------|
@@ -209,52 +240,57 @@ const page = await getPageBySlug("aviso-legal");
 | **ACTIVIDAD** | Charlas, talleres, presentaciones | `/actividades` |
 | **PODCAST** | Sesiones mensuales | `/podcast` |
 
-### 8.2 Estructura común
+### 10.2 Estructura común
 
 ```typescript
 {
   type: "PERSONA" | "EVENTO" | "PODCAST" | "ACTIVIDAD",
-  data: { ... },      // Contenido real
-  style: { ... }      // Solo frontend (size, etc.)
+  data: {
+    // ... campos específicos del tipo
+    showOnHome?: boolean,  // Mostrar en Archivo Vivo (home)
+    featured?: boolean,    // Destacar (tamaño grande en grids)
+  }
 }
 ```
 
-### 8.3 PERSONA
+### 10.3 PERSONA
 
 ```typescript
 {
   title: string;
   slug: string;
-  label: string;        // "DJ", "BANDA", "DUO"
-  roles?: string[];     // ["dj", "artista"]
+  label: string;        // "DJ", "BANDA", "MC", "CANTAUTOR"
+  roles?: string[];
   bio?: string;
   genres?: string[];
   images?: string[];
   youtube?: string;
   related?: string[];
   showOnHome?: boolean;
+  featured?: boolean;
 }
 ```
 
-### 8.4 EVENTO
+### 10.4 EVENTO
 
 ```typescript
 {
   title: string;
   slug: string;
   date?: string;
-  label: string;
+  label?: string;       // "CONCIERTO", "DJ Set", etc.
   isLive?: boolean;
-  isHero?: boolean;
+  isHero?: boolean;     // Mostrar en Hero de home
   heroPriority?: number;
   heroImage?: string;
   images?: string[];
-  related: string[];
+  related?: string[];
   showOnHome?: boolean;
+  featured?: boolean;
 }
 ```
 
-### 8.5 ACTIVIDAD
+### 10.5 ACTIVIDAD
 
 ```typescript
 {
@@ -263,19 +299,39 @@ const page = await getPageBySlug("aviso-legal");
   date?: string;
   label: "CHARLA" | "TALLER" | "PRESENTACIÓN";
   description?: string;
-  venue?: string;           // Lugar
-  externalUrl?: string;     // Link externo
+  venue?: string;
+  externalUrl?: string;
   images?: string[];
   related?: string[];
   showOnHome?: boolean;
+  featured?: boolean;
+}
+```
+
+### 10.6 PODCAST
+
+```typescript
+{
+  title: string;
+  slug: string;
+  date?: string;
+  description?: string;
+  youtube?: {
+    channel?: string;   // URL del canal
+    videoUrl?: string;  // URL del vídeo
+  };
+  images?: string[];
+  related?: string[];
+  showOnHome?: boolean;
+  featured?: boolean;
 }
 ```
 
 ---
 
-## 9. Deploy & Comandos
+## 11. Deploy & Comandos
 
-### 9.1 Comandos disponibles
+### 11.1 Comandos disponibles
 
 | Comando              | Acción                                    |
 | :------------------- | :---------------------------------------- |
@@ -287,7 +343,7 @@ const page = await getPageBySlug("aviso-legal");
 | `npm run deploy:preview` | Build + Deploy preview (URL temporal) |
 | `npm run deploy:prod`    | Build + Deploy producción             |
 
-### 9.2 Deploy con Netlify
+### 11.2 Deploy con Netlify
 
 **Producción (automático):**
 ```bash
@@ -305,7 +361,7 @@ npm run build && netlify deploy --dir=dist
 npm run build && netlify deploy --dir=dist --prod
 ```
 
-### 9.3 Configuración Netlify (`netlify.toml`)
+### 11.3 Configuración Netlify (`netlify.toml`)
 
 ```toml
 [build]
@@ -316,7 +372,7 @@ npm run build && netlify deploy --dir=dist --prod
   NODE_VERSION = "20"
 ```
 
-### 9.4 URL de producción
+### 11.4 URL de producción
 
 ```
 https://santakomusicwb.netlify.app
@@ -324,7 +380,7 @@ https://santakomusicwb.netlify.app
 
 ---
 
-## 10. Tech Stack
+## 12. Tech Stack
 
 - **Astro 5** - Framework
 - **Tailwind CSS 4** - Estilos
@@ -334,7 +390,7 @@ https://santakomusicwb.netlify.app
 
 ---
 
-## 11. Comandos Cursor
+## 13. Comandos Cursor
 
 | Dices | Acción |
 |-------|--------|
@@ -345,7 +401,7 @@ https://santakomusicwb.netlify.app
 
 ---
 
-## 12. Próximos Pasos
+## 14. Próximos Pasos
 
 - [ ] Migrar todo el contenido mock a WordPress
 - [ ] Implementar Custom Post Types en WordPress (Personas, Eventos, Actividades, Podcast)

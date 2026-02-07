@@ -12,6 +12,7 @@ const featured = content.find((item) => item.type === "PERSONA");
         src={featured.data.images?.[0]}
         alt={featured.data.title}
         class="w-full h-[420px] object-cover rounded-lg"
+        loading="lazy"
       />
 
       <div>

@@ -7,7 +7,6 @@ export const content: ContentNode[] = [
 
   {
     type: "PERSONA",
-    style: { size: "medium", color: "accent-person" },
     data: {
       title: "Toni Dj",
       label: "DJ",
@@ -33,7 +32,6 @@ export const content: ContentNode[] = [
 
   {
     type: "PERSONA",
-    style: { size: "large", color: "accent-person" },
     data: {
       title: "Motosierras",
       label: "BANDA",
@@ -55,12 +53,12 @@ export const content: ContentNode[] = [
       ],
       related: ["santako-live-sessions"],
       showOnHome: true,
+      featured: true,
     },
   },
 
   {
     type: "PERSONA",
-    style: { size: "medium", color: "accent-person" },
     data: {
       title: "Frantxu Kalamaro",
       label: "ARTISTA",
@@ -77,7 +75,6 @@ export const content: ContentNode[] = [
 
   {
     type: "PERSONA",
-    style: { size: "large", color: "accent-person" },
     data: {
       title: "Sr. Q",
       label: "BANDA",
@@ -94,7 +91,6 @@ export const content: ContentNode[] = [
 
   {
     type: "PERSONA",
-    style: { size: "medium", color: "accent-person" },
     data: {
       title: "DKORALES",
       label: "BANDA",
@@ -115,7 +111,6 @@ export const content: ContentNode[] = [
 
   {
     type: "PERSONA",
-    style: { size: "small", color: "accent-person" },
     data: {
       title: "Paco & Xavi",
       label: "DUO",
@@ -135,7 +130,6 @@ export const content: ContentNode[] = [
 
   {
     type: "PERSONA",
-    style: { size: "large", color: "accent-person" },
     data: {
       title: "Daniel Higiénico",
       label: "CANTAUTOR",
@@ -148,12 +142,12 @@ export const content: ContentNode[] = [
       images: ["/images/personas/daniel-higienico-1.jpg"],
       related: ["acoustic-nights"],
       showOnHome: true,
+      featured: true,
     },
   },
 
   {
     type: "PERSONA",
-    style: { size: "medium", color: "accent-person" },
     data: {
       title: "Apto Para Consumo",
       label: "BANDA",
@@ -177,7 +171,6 @@ export const content: ContentNode[] = [
   },
   {
     type: "PERSONA",
-    style: { size: "medium", color: "accent-person" },
     data: {
       title: "Dj Albert B",
       label: "DJ",
@@ -194,7 +187,6 @@ export const content: ContentNode[] = [
 
   {
     type: "PERSONA",
-    style: { size: "large", color: "accent-person" },
     data: {
       title: "Eltoni, Elpako & Elaitor",
       label: "BANDA",
@@ -208,48 +200,53 @@ export const content: ContentNode[] = [
     },
   },
 
+  {
+    type: "PERSONA",
+    data: {
+      title: "Marko Fontana",
+      label: "MC",
+      slug: "marko-fontana",
+      genres: ["Hip Hop", "Soul", "Música Negra"],
+      members: ["Marco Fonktana"],
+      bio: "Marco Fonktana a.k.a ElTornado es un veterano MC, músico y activista de la escena del hip hop y la música negra de Barcelona. Parte activa de bandas como Soul Divos, Aerolineas Subterraneas y Hombres Bala, ha colaborado en multitud de proyectos con artistas tanto en directo como en estudio. Inquieto y con espíritu divulgador, su estilo costumbrista y elegante ha recorrido la mayoría de la geografía española. Ahora presenta Clave Ardiendo, un podcast donde da cabida a lo que no tiene cabida en el circuito oficial.",
+      youtube: "https://www.youtube.com/@Clavoardiendovideo",
+      images: ["/images/personas/marko-fontana-1.jpg"],
+      related: ["clave-ardiendo"],
+    },
+  },
+
   // ======================
   // EVENTOS (FAKE, COHERENTES)
   // ======================
+
+  // 🔥 EVENTO HERO ACTUAL - Febrero 2026
   {
     type: "EVENTO",
-    style: { size: "large", color: "accent-event" },
     data: {
-      title: "Jam Session Can Sisteré",
-      slug: "jam-session-can-sistere",
-      date: "2025-03-15",
+      title: "Nit de Blues · Psycho Club",
+      slug: "nit-de-blues-psycho-club-2026",
+      label: "CONCIERTO",
+      date: "2026-02-14",
 
-      // 👇 IMÁGENES DEL EVENTO
-      images: [
-        "/images/eventos/jam-session-can-sistere-1.jpg",
-        "/images/eventos/jam-session-can-sistere-2.jpg",
-      ],
+      images: ["/images/eventos/jam-sistere-1.jpg"],
+      heroImage: "/images/eventos/jam-sistere-1.jpg",
 
-      // 👇 IMAGEN ESPECÍFICA PARA EL HERO
-      heroImage: "/images/eventos/jam-session-can-sistere-hero.jpg",
-
-      // 👇 FLAGS EDITORIALES
       isHero: true,
       heroPriority: 1,
 
-      related: [],
+      related: ["daniel-higienico", "dkorales"],
     },
   },
   {
     type: "EVENTO",
-    style: { size: "large", color: "accent-event" },
     data: {
       title: "Santako Live Sessions",
       label: "CONCIERTO",
       slug: "santako-live-sessions",
       date: "2025-06-14",
       images: [
-        "/images/eventos/santako-live-sessions-1.jpg",
-        "/images/eventos/santako-live-sessions-2.jpg",
-        "/images/eventos/santako-live-sessions-3.jpg",
+        "/images/eventos/event-1.jpg",
       ],
-      isHero: true,
-      heroPriority: 1,
       related: ["toni-dj", "motosierras", "sr-q", "dkorales", "dj-albert-b"],
       showOnHome: true,
     },
@@ -257,7 +254,6 @@ export const content: ContentNode[] = [
 
   {
     type: "EVENTO",
-    style: { size: "medium", color: "accent-event" },
     data: {
       title: "Acoustic Nights",
       label: "CONCIERTO",
@@ -275,7 +271,6 @@ export const content: ContentNode[] = [
   },
   {
     type: "EVENTO",
-    style: { size: "medium", color: "accent-event" },
     data: {
       title: "Podcast Santako Live · Escena Local",
       slug: "podcast-santako-live-escena-local",
@@ -289,7 +284,6 @@ export const content: ContentNode[] = [
 
   {
     type: "EVENTO",
-    style: { size: "small", color: "accent-event" },
     data: {
       title: "DJ Session · Santako Nights",
       slug: "dj-session-santako-nights",
@@ -301,27 +295,161 @@ export const content: ContentNode[] = [
     },
   },
   // ======================
-  // PODCAST (FAKE, COHERENTE)
+  // PODCASTS
   // ======================
+
+  // 🎙️ PODCAST OFICIAL SANTAKO MUSIC
+  {
+    type: "PODCAST",
+    data: {
+      title: "Podcast Santako · Enero 2026",
+      slug: "podcast-santako-enero-2026",
+      date: "2026-01-28",
+      description:
+        "Arrancamos el año con una sesión especial del podcast oficial de Santako Music. Repasamos lo mejor de 2025 y avanzamos los proyectos de este nuevo año.",
+      youtube: {
+        channel: "https://www.youtube.com/@santakomusic",
+        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      },
+      images: ["/images/eventos/podcast-live-1.jpg"],
+      related: ["daniel-higienico", "dkorales"],
+    },
+  },
+
+  {
+    type: "PODCAST",
+    data: {
+      title: "Podcast Santako · Diciembre 2025",
+      slug: "podcast-santako-diciembre-2025",
+      date: "2025-12-18",
+      description:
+        "Último podcast del año con invitados especiales. Celebramos la música local y brindamos por un 2026 lleno de ritmo.",
+      youtube: {
+        channel: "https://www.youtube.com/@santakomusic",
+        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      },
+      images: ["/images/eventos/podcast-live-1.jpg"],
+      related: ["motosierras", "sr-q"],
+    },
+  },
+
+  {
+    type: "PODCAST",
+    data: {
+      title: "Podcast Santako · Octubre 2025",
+      slug: "podcast-santako-octubre-2025",
+      date: "2025-10-15",
+      description:
+        "Especial otoño con artistas que han marcado el año. Hablamos de festivales, bolos y proyectos futuros.",
+      youtube: {
+        channel: "https://www.youtube.com/@santakomusic",
+        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      },
+      images: ["/images/eventos/podcast-live-1.jpg"],
+      related: ["eltoni-elpako-elaitor"],
+    },
+  },
+
+  {
+    type: "PODCAST",
+    data: {
+      title: "Podcast Santako · Julio 2025",
+      slug: "podcast-santako-julio-2025",
+      date: "2025-07-20",
+      description:
+        "Edición veraniega con repaso a la temporada de festivales y conciertos al aire libre en Santa Coloma.",
+      youtube: {
+        channel: "https://www.youtube.com/@santakomusic",
+        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      },
+      images: ["/images/eventos/podcast-live-1.jpg"],
+      related: ["dj-albert-b", "malas-formas"],
+    },
+  },
+
   {
     type: "PODCAST",
     data: {
       title: "Podcast Santako · Abril 2025",
       slug: "podcast-santako-abril-2025",
-
       date: "2025-04-30",
-
       description:
         "Sesión mensual del podcast Santako Music grabada en directo, con invitados de la escena local.",
-
       youtube: {
         channel: "https://www.youtube.com/@santakomusic",
-        videoUrl: "https://www.youtube.com/watch?v=XXXXXXXX",
+        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       },
-
       images: ["/images/eventos/podcast-live-1.jpg"],
-
       related: ["dj-albert-b", "daniel-higienico"],
+    },
+  },
+
+  {
+    type: "PODCAST",
+    data: {
+      title: "Podcast Santako · Febrero 2025",
+      slug: "podcast-santako-febrero-2025",
+      date: "2025-02-14",
+      description:
+        "San Valentín musical: hablamos de canciones de amor, desamor y todo lo que hay entre medias con artistas locales.",
+      youtube: {
+        channel: "https://www.youtube.com/@santakomusic",
+        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      },
+      images: ["/images/eventos/podcast-live-1.jpg"],
+      related: ["paco-xavi", "apto-para-consumo"],
+    },
+  },
+
+  // 🔥 CLAVE ARDIENDO - Podcast de Marko Fontana
+  {
+    type: "PODCAST",
+    data: {
+      title: "Clave Ardiendo · Clandestino Club Social #12",
+      slug: "clave-ardiendo-clandestino-12",
+      date: "2026-01-15",
+      description:
+        "Marko Fontana recibe a veteranos de la escena hip hop barcelonesa para hablar de los orígenes del movimiento, las batallas de gallos y la evolución del rap en castellano.",
+      youtube: {
+        channel: "https://www.youtube.com/@Clavoardiendovideo",
+        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      },
+      images: ["/images/eventos/podcast-live-1.jpg"],
+      related: ["marko-fontana"],
+    },
+  },
+
+  {
+    type: "PODCAST",
+    data: {
+      title: "Clave Ardiendo · Clandestino Club Social #11",
+      slug: "clave-ardiendo-clandestino-11",
+      date: "2025-12-10",
+      description:
+        "En este episodio hablamos de música negra, soul y funk con músicos que llevan décadas en la escena underground de Barcelona.",
+      youtube: {
+        channel: "https://www.youtube.com/@Clavoardiendovideo",
+        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      },
+      images: ["/images/eventos/podcast-live-1.jpg"],
+      related: ["marko-fontana"],
+    },
+  },
+
+  {
+    type: "PODCAST",
+    data: {
+      title: "Clave Ardiendo · Clandestino Club Social #10",
+      slug: "clave-ardiendo-clandestino-10",
+      date: "2025-11-05",
+      description:
+        "Especial reggae y dub. Marko Fontana conversa con selectores y soundsystems que llevan el mensaje roots por toda la península.",
+      youtube: {
+        channel: "https://www.youtube.com/@Clavoardiendovideo",
+        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      },
+      images: ["/images/eventos/podcast-live-1.jpg"],
+      related: ["marko-fontana"],
     },
   },
 
@@ -330,7 +458,6 @@ export const content: ContentNode[] = [
   // ======================
   {
     type: "ACTIVIDAD",
-    style: { size: "medium", color: "accent-event" },
     data: {
       title: "La rebelión de RadioActivas",
       slug: "rebelion-radioactivas",
@@ -346,7 +473,6 @@ export const content: ContentNode[] = [
 
   {
     type: "ACTIVIDAD",
-    style: { size: "small", color: "accent-event" },
     data: {
       title: "Charla con Ferran Boutin: Santakomusic, Blues y Betis",
       slug: "charla-ferran-boutin",

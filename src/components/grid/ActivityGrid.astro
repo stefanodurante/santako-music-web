@@ -5,9 +5,11 @@ import Tag from "../ui/Tag.astro";
 
 interface Props {
   items: ContentNode[];
+  /** Patrón de layout: "editorial" alterna tamaños, "uniform" usa el mismo */
+  layout?: "editorial" | "uniform";
 }
 
-const { items } = Astro.props as Props;
+const { items, layout = "editorial" } = Astro.props as Props;
 
 const getVariant = (item: ContentNode) => {
   if (item.type === "PERSONA") return "person";
@@ -16,15 +18,33 @@ const getVariant = (item: ContentNode) => {
   if (item.type === "EVENTO" && item.data.isLive) return "live";
   return "event";
 };
+
+/**
+ * TAMAÑO BASADO EN CONTENIDO
+ * - Si item.data.featured = true → large
+ * - Si layout = "uniform" → medium
+ * - Fallback: patrón por posición
+ */
+const getSize = (item: ContentNode, index: number): "small" | "medium" | "large" => {
+  // Prioridad 1: campo featured del contenido
+  if ("featured" in item.data && item.data.featured) return "large";
+  
+  // Prioridad 2: layout uniforme
+  if (layout === "uniform") return "medium";
+  
+  // Fallback: patrón editorial por posición
+  const largePositions = [0, 4, 7];
+  return largePositions.includes(index) ? "large" : "medium";
+};
 ---
 
 <section class="section-grid grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[180px] md:auto-rows-[200px]">
   {
-    items.map((item) => {
+    items.map((item, index) => {
       const image = item.data.images?.[0];
 
       return (
-        <Card size={item.style?.size ?? "medium"}>
+        <Card size={getSize(item, index)}>
           <div class="group relative h-full overflow-hidden">
             {/* IMAGEN */}
             {image && (
@@ -32,6 +52,7 @@ const getVariant = (item: ContentNode) => {
                 src={image}
                 alt={item.data.title}
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
               />
             )}
 

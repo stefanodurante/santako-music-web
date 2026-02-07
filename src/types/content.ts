@@ -4,14 +4,6 @@ export type ContentType = "EVENTO" | "PERSONA" | "PODCAST" | "ACTIVIDAD";
 export type ImagePath = `${string}.${"jpg" | "jpeg" | "png" | "webp"}`;
 
 /**
- * SOLO FRONTEND (grid / cards)
- */
-export type ContentStyle = {
-  size?: "small" | "medium" | "large";
-  color?: "accent-event" | "accent-person" | "accent-live";
-};
-
-/**
  * PERSONA
  */
 export type PersonaData = {
@@ -34,6 +26,9 @@ export type PersonaData = {
 
   /** Mostrar en la home (Archivo Vivo) */
   showOnHome?: boolean;
+
+  /** Destacar (tamaño grande en grids) */
+  featured?: boolean;
 };
 
 /**
@@ -55,6 +50,9 @@ export type EventoData = {
 
   /** Mostrar en la home (Archivo Vivo) */
   showOnHome?: boolean;
+
+  /** Destacar (tamaño grande en grids) */
+  featured?: boolean;
 };
 
 /**
@@ -78,6 +76,9 @@ export type PodcastData = {
 
   /** Mostrar en la home (Archivo Vivo) */
   showOnHome?: boolean;
+
+  /** Destacar (tamaño grande en grids) */
+  featured?: boolean;
 };
 
 /**
@@ -108,29 +109,19 @@ export type ActividadData = {
 
   /** Mostrar en la home (Archivo Vivo) */
   showOnHome?: boolean;
+
+  /** Destacar (tamaño grande en grids) */
+  featured?: boolean;
 };
 
 /**
  * NODO UNIFICADO
+ * 
+ * Nota: El estilo visual (tamaños, colores) se determina
+ * en los componentes del frontend, no en el contenido.
  */
 export type ContentNode =
-  | {
-      type: "PERSONA";
-      style?: ContentStyle;
-      data: PersonaData;
-    }
-  | {
-      type: "EVENTO";
-      style?: ContentStyle;
-      data: EventoData;
-    }
-  | {
-      type: "PODCAST";
-      style?: ContentStyle;
-      data: PodcastData;
-    }
-  | {
-      type: "ACTIVIDAD";
-      style?: ContentStyle;
-      data: ActividadData;
-    };
+  | { type: "PERSONA"; data: PersonaData }
+  | { type: "EVENTO"; data: EventoData }
+  | { type: "PODCAST"; data: PodcastData }
+  | { type: "ACTIVIDAD"; data: ActividadData };
