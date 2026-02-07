@@ -29,6 +29,30 @@ When user says **"deploy"**, **"push and deploy"** or **"deploy to prod"**:
 
 > If not on main, warn the user and abort.
 
+When user says **"preview"** or **"deploy preview"**:
+
+1. **Build the project**:
+   ```bash
+   npm run build
+   ```
+2. **Deploy to Netlify (preview URL)**:
+   ```bash
+   netlify deploy --dir=dist
+   ```
+3. **Share the temporary URL** with the user
+
+When user says **"netlify prod"** or **"deploy netlify"**:
+
+1. **Build the project**:
+   ```bash
+   npm run build
+   ```
+2. **Deploy to Netlify production**:
+   ```bash
+   netlify deploy --dir=dist --prod
+   ```
+3. **Share the production URL** with the user
+
 When user says **"new branch for X"** or **"checkout to feature X"**:
 
 ```bash
