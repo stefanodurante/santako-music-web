@@ -43,9 +43,9 @@ export interface WPMedia {
 }
 
 /**
- * FETCH GENÉRICO
+ * FETCH GENÉRICO CON MANEJO DE ERRORES
  */
-async function fetchWP<T>(endpoint: string, params?: Record<string, string>): Promise<T> {
+async function fetchWP<T>(endpoint: string, params?: Record<string, string>): Promise<T | null> {
   const url = new URL(`${WP_API_URL}${endpoint}`);
   
   if (params) {
@@ -54,13 +54,21 @@ async function fetchWP<T>(endpoint: string, params?: Record<string, string>): Pr
     });
   }
 
-  const response = await fetch(url.toString());
-  
-  if (!response.ok) {
-    throw new Error(`WordPress API error: ${response.status}`);
-  }
+  try {
+    const response = await fetch(url.toString(), {
+      headers: { "Accept": "application/json" },
+    });
+    
+    if (!response.ok) {
+      console.warn(`WordPress API error: ${response.status} for ${endpoint}`);
+      return null;
+    }
 
-  return response.json();
+    return response.json();
+  } catch (error) {
+    console.warn(`WordPress fetch failed for ${endpoint}:`, error);
+    return null;
+  }
 }
 
 /**
@@ -81,24 +89,26 @@ export async function getPosts(options?: {
     params.categories = options.categories.join(",");
   }
 
-  return fetchWP<WPPost[]>("/posts", params);
+  const result = await fetchWP<WPPost[]>("/posts", params);
+  return result ?? [];
 }
 
 export async function getPostBySlug(slug: string): Promise<WPPost | null> {
   const posts = await fetchWP<WPPost[]>("/posts", { slug });
-  return posts[0] ?? null;
+  return posts?.[0] ?? null;
 }
 
 /**
  * PÁGINAS
  */
 export async function getPages(): Promise<WPPage[]> {
-  return fetchWP<WPPage[]>("/pages", { per_page: "100" });
+  const result = await fetchWP<WPPage[]>("/pages", { per_page: "100" });
+  return result ?? [];
 }
 
 export async function getPageBySlug(slug: string): Promise<WPPage | null> {
   const pages = await fetchWP<WPPage[]>("/pages", { slug });
-  return pages[0] ?? null;
+  return pages?.[0] ?? null;
 }
 
 /**
