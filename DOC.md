@@ -387,6 +387,7 @@ https://santakomusicwb.netlify.app
 - **Astro 5** - Framework
 - **Tailwind CSS 4** - Estilos
 - **TypeScript** - Tipado estricto
+- **Vitest** - Testing
 - **WordPress REST API** - CMS headless
 - **Netlify** - Hosting & Deploy
 
@@ -394,12 +395,21 @@ https://santakomusicwb.netlify.app
 
 ## 13. Comandos Cursor
 
-| Dices | Acción |
-|-------|--------|
-| `/commit and merge` | Commit cambios y merge a main |
-| `/deploy` o `/push and deploy` | Push a main (requiere estar en main) |
-| `/preview` o `/deploy preview` | Build + URL temporal Netlify |
-| `/netlify prod` | Build + Deploy producción Netlify |
+Di estas frases en chat (con o sin `/` según tu configuración):
+
+| Comando | Acción |
+|--------|--------|
+| `new feature <nombre>` | Crea rama `feature/` desde develop |
+| `new content <nombre>` | Crea rama `content/` desde develop |
+| `new fix <nombre>` | Crea rama `fix/` desde develop |
+| `merge feature` | Mergea la rama actual (feature/content/fix) a develop |
+| `prepare production` | Mergea develop a main |
+| `preview` | Build + Netlify deploy preview (URL temporal) |
+| `deploy prod` | Push a main (Netlify auto-deploy, requiere estar en main) |
+
+### Formato de commit
+
+`type: short description` — tipos: feat, content, fix, refactor, style, docs, chore
 
 ---
 
