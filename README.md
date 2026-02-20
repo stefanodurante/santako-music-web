@@ -2,6 +2,8 @@
 
 Archivo vivo de música y cultura urbana.
 
+> Documentación completa: [ARCHITECTURE.md](ARCHITECTURE.md) · Manual operativo: [PROJECT_MANUALmd](PROJECT_MANUALmd)
+
 ## 🚀 Project Structure
 
 ```text
@@ -29,8 +31,11 @@ Archivo vivo de música y cultura urbana.
 | `npm run dev`       | Starts local dev server at `localhost:4321`   |
 | `npm run build`     | Build your production site to `./dist/`       |
 | `npm run preview`   | Preview your build locally                    |
-| `npm run deploy:preview` | Build + Netlify preview deploy           |
+| `npm run deploy`         | Push a main (Netlify auto-deploy)         |
+| `npm run deploy:preview` | Build + Netlify preview deploy            |
 | `npm run deploy:prod`    | Build + Netlify production deploy         |
+| `npm run test`           | Run tests (Vitest)                        |
+| `npm run test:watch`     | Tests in watch mode                       |
 
 ## Tech Stack
 
