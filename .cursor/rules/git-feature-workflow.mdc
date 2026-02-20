@@ -5,6 +5,18 @@ alwaysApply: true
 
 # Santako Music Git Workflow
 
+## When user says "commit"
+
+When on develop (or feature/content/fix branch):
+
+1. Check status: git status
+2. Stage: git add .
+3. Commit: git commit -m "type: short description"
+
+Use appropriate type: feat, content, fix, refactor, style, docs, chore.
+
+---
+
 ## When user says "merge feature"
 
 1. Check branch:
