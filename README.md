@@ -37,6 +37,7 @@ Archivo vivo de música y cultura urbana.
 - Astro 5
 - Tailwind CSS 4
 - TypeScript (strict mode)
+- Vitest (testing)
 
 ## Cursor Rules
 
@@ -54,4 +55,14 @@ Archivo vivo de música y cultura urbana.
 
 ### Commit format
 
-`type: short description` — tipos: feat, fix, refactor, style, content, docs, chore
+`type: short description`
+
+| Type | Use for |
+|------|---------|
+| `feat` | New features, components, functionality |
+| `content` | Text, copy, media, data (no code logic change) |
+| `fix` | Bug fixes, corrections |
+| `refactor` | Code improvements without changing behavior |
+| `style` | Visual adjustments (CSS, spacing) |
+| `docs` | Documentation |
+| `chore` | Tooling, config, maintenance |

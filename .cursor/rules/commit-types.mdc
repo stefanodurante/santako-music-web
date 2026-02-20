@@ -15,6 +15,15 @@ alwaysApply: true
 
 ---
 
+## Other valid types
+
+| Type | Use for |
+|------|--------|
+| `refactor` | Internal improvements without changing behavior |
+| `style` | Visual adjustments (CSS, spacing, UI tweaks) |
+| `docs` | Documentation updates |
+| `chore` | Tooling, config, non-feature maintenance |
+
 ## feat (feature)
 
 - New components, pages, or functionality
