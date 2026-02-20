@@ -9,7 +9,9 @@
     "astro": "astro",
     "deploy": "bash -c 'if [ \"$(git branch --show-current)\" = \"main\" ]; then git push origin main && echo \"✓ Deployed to production\"; else echo \"✗ Solo se puede hacer deploy desde main\" && exit 1; fi'",
     "deploy:preview": "npm run build && netlify deploy --dir=dist",
-    "deploy:prod": "npm run build && netlify deploy --dir=dist --prod"
+    "deploy:prod": "npm run build && netlify deploy --dir=dist --prod",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
@@ -21,6 +23,7 @@
   },
   "devDependencies": {
     "@types/react": "^19.2.10",
-    "@types/react-dom": "^19.2.3"
+    "@types/react-dom": "^19.2.3",
+    "vitest": "^4.0.18"
   }
 }

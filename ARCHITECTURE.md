@@ -2,6 +2,8 @@
 
 **Estado actual: MVP completo con integración WordPress + Deploy Netlify**
 
+> Resumen rápido: [README.md](README.md) · Manual operativo: [PROJECT_MANUALmd](PROJECT_MANUALmd)
+
 ---
 
 ## 1. Visión General · Archivo Vivo
@@ -195,7 +197,7 @@ La página `/podcast` muestra dos grupos de podcasts:
 
 ## 9. Integración WordPress
 
-### 7.1 Cliente API (`src/lib/wordpress.ts`)
+### 9.1 Cliente API (`src/lib/wordpress.ts`)
 
 ```typescript
 import { getPosts, getPageBySlug } from "../lib/wordpress";
@@ -207,7 +209,7 @@ const posts = await getPosts({ perPage: 12 });
 const page = await getPageBySlug("aviso-legal");
 ```
 
-### 7.2 Funciones disponibles
+### 9.2 Funciones disponibles
 
 | Función           | Descripción                        |
 | ----------------- | ---------------------------------- |
@@ -218,12 +220,12 @@ const page = await getPageBySlug("aviso-legal");
 | `getMedia()`      | Obtener imagen por ID              |
 | `getLegalPages()` | Helper para las 3 páginas legales  |
 
-### 7.3 Utilidades
+### 9.3 Utilidades
 
 - `stripHtml()` - Elimina tags HTML
 - `decodeHtmlEntities()` - Decodifica entidades HTML
 
-### 7.4 Notas
+### 9.4 Notas
 
 - **No requiere autenticación** (lectura pública)
 - Contenido cacheado en build time (SSG)
@@ -341,9 +343,11 @@ const page = await getPageBySlug("aviso-legal");
 | `npm run dev`        | Servidor local en `localhost:4321`        |
 | `npm run build`      | Build de producción en `./dist/`          |
 | `npm run preview`    | Preview del build                         |
-| `npm run deploy`     | Push a main (solo desde main)             |
-| `npm run deploy:preview` | Build + Deploy preview (URL temporal) |
-| `npm run deploy:prod`    | Build + Deploy producción             |
+| `npm run deploy`        | Push a main (solo desde main)             |
+| `npm run deploy:preview`| Build + Deploy preview (URL temporal)     |
+| `npm run deploy:prod`   | Build + Deploy producción                 |
+| `npm run test`          | Ejecuta tests (Vitest)                    |
+| `npm run test:watch`    | Tests en modo watch                       |
 
 ### 11.2 Deploy con Netlify
 
@@ -387,6 +391,7 @@ https://santakomusicwb.netlify.app
 - **Astro 5** - Framework
 - **Tailwind CSS 4** - Estilos
 - **TypeScript** - Tipado estricto
+- **Vitest** - Testing
 - **WordPress REST API** - CMS headless
 - **Netlify** - Hosting & Deploy
 
@@ -394,12 +399,25 @@ https://santakomusicwb.netlify.app
 
 ## 13. Comandos Cursor
 
-| Dices | Acción |
-|-------|--------|
-| `/commit and merge` | Commit cambios y merge a main |
-| `/deploy` o `/push and deploy` | Push a main (requiere estar en main) |
-| `/preview` o `/deploy preview` | Build + URL temporal Netlify |
-| `/netlify prod` | Build + Deploy producción Netlify |
+Di estas frases en chat (con o sin `/` según tu configuración):
+
+| Comando | Acción |
+|--------|--------|
+| `new feature <nombre>` | Crea rama `feature/` desde develop |
+| `new content <nombre>` | Crea rama `content/` desde develop |
+| `new fix <nombre>` | Crea rama `fix/` desde develop |
+| `merge feature` | Mergea la rama actual (feature/content/fix) a develop |
+| `prepare production` | Mergea develop a main |
+| `preview` | Build + Netlify deploy preview (URL temporal) |
+| `deploy prod` | Push a main (Netlify auto-deploy, requiere estar en main) |
+
+### Formato de commit
+
+`type: short description` — tipos: feat, content, fix, refactor, style, docs, chore
+
+### Skills Cursor (4 roles)
+
+Ver [PROJECT_MANUALmd](PROJECT_MANUALmd) §7: Arquitecto Astro, Diseñador Sistema Cultural, Editor Archivo Vivo, Guardián de Coherencia.
 
 ---
 

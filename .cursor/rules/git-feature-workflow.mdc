@@ -1,77 +1,108 @@
 ---
-description: Git feature branch workflow - commit, merge, deploy
+description: Santako Music Git workflow - feature → develop → main → deploy
 alwaysApply: true
 ---
 
-# Git Feature Branch Workflow
+# Santako Music Git Workflow
 
-When the user says **"merge feature"** or **"commit and merge"**:
+## When user says "commit"
 
-1. **Check status**: `git status && git diff --stat`
-2. **Commit changes** with descriptive message:
-   ```bash
-   git add . && git commit -m "Feature description"
-   ```
-3. **Merge to main**:
-   ```bash
-   git checkout main && git merge <branch> --no-edit
-   ```
+When on develop (or feature/content/fix branch):
 
-When user says **"deploy"**, **"push and deploy"** or **"deploy to prod"**:
+1. Check status: git status
+2. Stage: git add .
+3. Commit: git commit -m "type: short description"
 
-1. **Verify branch**: Must be on `main`
-2. **Check for uncommitted changes**: `git status`
-3. **Push to origin**:
-   ```bash
+Use appropriate type: feat, content, fix, refactor, style, docs, chore.
+
+---
+
+## When user says "merge feature"
+
+1. Check branch:
+   git branch
+
+2. Commit changes (if needed):
+   git status
+   git add .
+   git commit -m "type: short description"  # use feat, content, or fix as appropriate
+
+3. Merge into develop:
+   git checkout develop
+   git pull
+   git merge <current-branch> --no-edit
+
+4. Push develop:
+   git push origin develop
+
+⚠️ Never merge feature directly into main.
+
+---
+
+## When user says "prepare production"
+
+1. Checkout develop:
+   git checkout develop
+   git pull
+
+2. Merge into main:
+   git checkout main
+   git pull
+   git merge develop --no-edit
+
+3. Push main:
    git push origin main
-   ```
-4. **Confirm**: Netlify auto-deploys on push to main
 
-> If not on main, warn the user and abort.
+Netlify auto-deploys on push to main.
 
-When user says **"preview"** or **"deploy preview"**:
+---
 
-1. **Build the project**:
-   ```bash
-   npm run build
-   ```
-2. **Deploy to Netlify (preview URL)**:
-   ```bash
-   netlify deploy --dir=dist
-   ```
-3. **Share the temporary URL** with the user
+## When user says "new feature X"
 
-When user says **"netlify prod"** or **"deploy netlify"**:
-
-1. **Build the project**:
-   ```bash
-   npm run build
-   ```
-2. **Deploy to Netlify production**:
-   ```bash
-   netlify deploy --dir=dist --prod
-   ```
-3. **Share the production URL** with the user
-
-When user says **"new branch for X"** or **"checkout to feature X"**:
-
-```bash
+git checkout develop
+git pull
 git checkout -b feature/<kebab-case-name>
-```
 
-## Branch Naming
+---
 
-- `feature/` - new features
-- `fix/` - bug fixes
-- `refactor/` - code improvements
+## When user says "new content X"
 
-## Commit Message Format
+git checkout develop
+git pull
+git checkout -b content/<kebab-case-name>
 
-```
-<type>: <short description>
+---
 
-- Detail 1
-- Detail 2
-```
+## When user says "new fix X"
 
-Types: `Add`, `Update`, `Fix`, `Refactor`, `Remove`
+git checkout develop
+git pull
+git checkout -b fix/<kebab-case-name>
+
+---
+
+## When user says "preview"
+
+npm run build
+netlify deploy --dir=dist
+
+---
+
+## When user says "deploy prod"
+
+From main branch: git push origin main (Netlify auto-deploys).
+
+---
+
+## Commit Format (mandatory)
+
+type: short description
+
+Allowed types:
+feat
+fix
+refactor
+style
+content
+docs
+chore
