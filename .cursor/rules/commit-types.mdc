@@ -1,0 +1,47 @@
+---
+description: Commit types - feat, content, fix - when to use and branch workflow
+alwaysApply: true
+---
+
+# Commit Types: feat / content / fix
+
+## When to use each type
+
+| Type | Use for | Example |
+|------|---------|---------|
+| `feat` | New features, UI components, functionality | `feat: add artist grid component` |
+| `content` | Text, copy, media, data - no code logic change | `content: update band bios` |
+| `fix` | Bug fixes, error handling, corrections | `fix: resolve mobile menu overflow` |
+
+---
+
+## feat (feature)
+
+- New components, pages, or functionality
+- New UI/UX elements
+- New integrations or APIs
+
+**Branch**: `feature/<kebab-case-name>` from develop  
+**Commit**: `feat: short description`
+
+---
+
+## content
+
+- Text, headlines, descriptions
+- Images, audio, media assets
+- Mock data, band info, events
+
+**Branch**: `content/<kebab-case-name>` from develop (or direct on develop for small edits)  
+**Commit**: `content: short description`
+
+---
+
+## fix
+
+- Bug fixes
+- Error handling
+- Layout or behavior corrections
+
+**Branch**: `fix/<kebab-case-name>` from develop  
+**Commit**: `fix: short description`

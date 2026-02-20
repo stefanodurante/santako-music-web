@@ -13,7 +13,7 @@ alwaysApply: true
 2. Commit changes (if needed):
    git status
    git add .
-   git commit -m "feat: short description"
+   git commit -m "type: short description"  # use feat, content, or fix as appropriate
 
 3. Merge into develop:
    git checkout develop
@@ -53,10 +53,32 @@ git checkout -b feature/<kebab-case-name>
 
 ---
 
+## When user says "new content X"
+
+git checkout develop
+git pull
+git checkout -b content/<kebab-case-name>
+
+---
+
+## When user says "new fix X"
+
+git checkout develop
+git pull
+git checkout -b fix/<kebab-case-name>
+
+---
+
 ## When user says "preview"
 
 npm run build
 netlify deploy --dir=dist
+
+---
+
+## When user says "deploy prod"
+
+From main branch: git push origin main (Netlify auto-deploys).
 
 ---
 
