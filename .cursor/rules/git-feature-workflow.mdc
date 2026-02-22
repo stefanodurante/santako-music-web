@@ -5,6 +5,14 @@ alwaysApply: true
 
 # Santako Music Git Workflow
 
+## When user says "clear"
+
+Respond only: **Listo. Nuevo contexto.**
+
+The user can start a fresh chat with `Ctrl+L` (Win/Linux) or `Cmd+L` (Mac) for a full clear.
+
+---
+
 ## When user says "commit"
 
 When on develop (or feature/content/fix branch):
