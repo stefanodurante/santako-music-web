@@ -63,7 +63,7 @@ La navegación está diseñada bajo un principio fundamental:
 │   │   ├── home/           # HeroEditorial, PodcastBlock, PersonaDestacada, ContactBlock
 │   │   ├── layout/         # Header, Footer
 │   │   ├── nav/            # MainNav (desktop + mobile)
-│   │   ├── personas/       # PersonasGrid
+│   │   ├── personas/       # PersonasGrid (filtros rol/género, búsqueda)
 │   │   └── ui/             # Button, Card, Tag, CTAButton, LogoEditorial, LogoImage
 │   ├── data/
 │   │   └── mock/           # content.ts (datos temporales)
@@ -176,6 +176,26 @@ La página `/podcast` muestra dos grupos de podcasts:
 - Lista con descripción
 - Canal: `@Clavoardiendovideo`
 - Presentado por Marko Fontana
+
+---
+
+## 7.5 Página de Personas
+
+La página `/personas` incluye filtros y búsqueda (client-side, mock data):
+
+### Filtros
+- **Rol**: Todos, DJ, Bandas, Dúos, Cantautores, Tributos
+- **Género**: Extraídos dinámicamente del contenido (Rock, Pop, Folk, etc.)
+
+### UI
+- **Desktop**: Panel colapsable (no ocupa espacio cerrado), botón "Filtros"
+- **Mobile**: Panel full-screen con botón "Aplicar filtros". Exclusivo con menú de navegación (no pueden estar abiertos a la vez)
+
+### Búsqueda
+- Por nombre en tiempo real
+
+### Estado vacío
+- Mensaje cuando no hay resultados + botón "Limpiar filtros"
 
 ---
 
@@ -425,7 +445,7 @@ Ver [PROJECT_MANUALmd](PROJECT_MANUALmd) §7: Arquitecto Astro, Diseñador Siste
 
 - [ ] Migrar todo el contenido mock a WordPress
 - [ ] Implementar Custom Post Types en WordPress (Personas, Eventos, Actividades, Podcast)
-- [ ] Añadir filtros y búsqueda en Personas
+- [x] Añadir filtros y búsqueda en Personas
 - [ ] Sistema de caché para API de WordPress
 - [ ] Optimización de imágenes (Astro Image)
 - [ ] Dominio personalizado en Netlify
