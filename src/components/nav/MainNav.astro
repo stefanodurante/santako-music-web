@@ -115,7 +115,7 @@ const navItems = [
   const overlay = document.getElementById("nav-overlay");
 
   function openMenu() {
-    // Mostrar menú
+    document.dispatchEvent(new CustomEvent("nav:open"));
     mobileNav?.classList.remove("translate-x-full");
     mobileNav?.classList.add("translate-x-0");
     overlay?.classList.remove("opacity-0", "pointer-events-none");
@@ -133,6 +133,8 @@ const navItems = [
     toggle?.setAttribute("aria-expanded", "false");
     document.body.style.overflow = "";
   }
+
+  document.addEventListener("filters:open", closeMenu);
 
   toggle?.addEventListener("click", openMenu);
   close?.addEventListener("click", closeMenu);
