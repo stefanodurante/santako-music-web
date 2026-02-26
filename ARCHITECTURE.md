@@ -119,15 +119,16 @@ La navegación está diseñada bajo un principio fundamental:
 - **Props:** `src`, `alt`, `variant` (`hero` | `card` | `agenda` | `portrait`), `priority?`, `class?`
 - **Rutas locales** (src que empieza por `/`): se renderiza `<img>` para que las imágenes en `public/` carguen correctamente en todos los entornos.
 - **URLs remotas:** se usa el componente `Image` de `astro:assets` para optimización.
+- **priority:** solo se usa en el **Hero de la home** (HeroEditorial) para mejorar LCP; las páginas de detalle (evento, persona) no usan `priority`.
 
 **Variantes:**
 
-| Variant   | Uso                    | Dimensiones aproximadas |
-| --------- | ---------------------- | ----------------------- |
-| `hero`    | Hero home, evento, persona | 1600×900            |
-| `card`    | Grids (archivo, noticias, actividades, logo) | 800×800   |
+| Variant   | Uso                         | Dimensiones aproximadas |
+| --------- | --------------------------- | ----------------------- |
+| `hero`    | Hero home (único con priority), evento, persona | 1400×788   |
+| `card`    | Grids (archivo, noticias, actividades) | 800×800   |
 | `agenda`  | Miniaturas en calendario agenda | 1200×800        |
-| `portrait`| Persona destacada, podcast | 800×1000           |
+| `portrait`| Persona destacada, podcast  | 800×1000           |
 
 **Placeholders:**
 
