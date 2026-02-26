@@ -44,6 +44,8 @@ Archivo vivo de música y cultura urbana.
 - TypeScript (strict mode)
 - Vitest (testing)
 
+Imágenes: **SmartImage** (variantes `hero` / `card` / `agenda` / `portrait`), placeholders en `public/images/` y `src/assets/`. Efectos unificados en grids (zoom, sombra, overlay). Ver [ARCHITECTURE.md](ARCHITECTURE.md) §4.3.
+
 ## Cursor Rules
 
 ### Git

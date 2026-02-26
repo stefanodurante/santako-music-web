@@ -54,7 +54,10 @@ La navegación está diseñada bajo un principio fundamental:
 ├── public/
 │   ├── images/
 │   │   ├── eventos/
-│   │   └── personas/
+│   │   ├── personas/
+│   │   ├── placeholder.svg
+│   │   ├── placeholder-agenda.svg
+│   │   └── placeholder-actividades.svg
 │   └── logo/
 ├── src/
 │   ├── components/
@@ -64,7 +67,8 @@ La navegación está diseñada bajo un principio fundamental:
 │   │   ├── layout/         # Header, Footer
 │   │   ├── nav/            # MainNav (desktop + mobile)
 │   │   ├── personas/       # PersonasGrid (filtros rol/género, búsqueda)
-│   │   └── ui/             # Button, Card, Tag, CTAButton, LogoEditorial, LogoImage
+│   │   └── ui/             # Button, Card, Tag, CTAButton, LogoEditorial, LogoImage, SmartImage
+│   ├── assets/             # Imágenes importadas (placeholder-actividades.jpg, etc.)
 │   ├── data/
 │   │   └── mock/           # content.ts (datos temporales)
 │   ├── layouts/
@@ -108,18 +112,43 @@ La navegación está diseñada bajo un principio fundamental:
 - **Heading**: Fraunces (serif)
 - **Body**: Inter (sans-serif)
 
-### 4.3 Secciones Semánticas
+### 4.3 Imágenes y placeholders
+
+**SmartImage** (`src/components/ui/SmartImage.astro`) unifica el uso de imágenes:
+
+- **Props:** `src`, `alt`, `variant` (`hero` | `card` | `agenda` | `portrait`), `priority?`, `class?`
+- **Rutas locales** (src que empieza por `/`): se renderiza `<img>` para que las imágenes en `public/` carguen correctamente en todos los entornos.
+- **URLs remotas:** se usa el componente `Image` de `astro:assets` para optimización.
+
+**Variantes:**
+
+| Variant   | Uso                    | Dimensiones aproximadas |
+| --------- | ---------------------- | ----------------------- |
+| `hero`    | Hero home, evento, persona | 1600×900            |
+| `card`    | Grids (archivo, noticias, actividades, logo) | 800×800   |
+| `agenda`  | Miniaturas en calendario agenda | 1200×800        |
+| `portrait`| Persona destacada, podcast | 800×1000           |
+
+**Placeholders:**
+
+- **Agenda:** `public/images/placeholder-agenda.svg` (o import desde assets si se migra).
+- **Actividades:** `src/assets/placeholder-actividades.jpg` (imagen fotográfica; se importa para que funcione en build/Docker).
+- **Genérico:** `public/images/placeholder.svg`.
+
+**Efectos unificados en grids:** zoom de imagen (`transition-transform duration-500 ease-out group-hover:scale-105`), sombra en cards (`shadow-sm hover:shadow-md`), overlay que se aclara al hover donde aplica. La agenda aplica el mismo zoom y sombra en celdas con eventos.
+
+### 4.4 Secciones Semánticas
 
 Todas las secciones tienen `id` y `class` semánticas:
 
-| Sección           | ID                  | Clase              |
-| ----------------- | ------------------- | ------------------ |
-| Hero              | `#hero`             | `.section-hero`    |
-| Agenda Home       | `#agenda-home`      | `.section-agenda`  |
-| Artista Destacado | `#artista-destacado`| `.section-featured`|
-| Podcast           | `#podcast`          | `.section-podcast` |
-| Archivo Vivo      | `#archivo`          | `.section-archive` |
-| Contacto          | `#contacto`         | `.section-contact` |
+| Sección           | ID                   | Clase               |
+| ----------------- | -------------------- | ------------------- |
+| Hero              | `#hero`              | `.section-hero`     |
+| Agenda Home       | `#agenda-home`       | `.section-agenda`   |
+| Artista Destacado | `#artista-destacado` | `.section-featured` |
+| Podcast           | `#podcast`           | `.section-podcast`  |
+| Archivo Vivo      | `#archivo`           | `.section-archive`  |
+| Contacto          | `#contacto`          | `.section-contact`  |
 
 ---
 
@@ -447,5 +476,5 @@ Ver [PROJECT_MANUALmd](PROJECT_MANUALmd) §7: Arquitecto Astro, Diseñador Siste
 - [ ] Implementar Custom Post Types en WordPress (Personas, Eventos, Actividades, Podcast)
 - [x] Añadir filtros y búsqueda en Personas
 - [ ] Sistema de caché para API de WordPress
-- [ ] Optimización de imágenes (Astro Image)
+- [x] Optimización de imágenes (SmartImage + astro:assets, placeholders, efectos unificados)
 - [ ] Dominio personalizado en Netlify
