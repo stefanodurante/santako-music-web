@@ -4,47 +4,80 @@ import { Image } from "astro:assets";
 interface Props {
   src: string;
   alt: string;
-  ratio?: "square" | "landscape" | "portrait";
+  variant?: "hero" | "card" | "agenda" | "portrait";
+  priority?: boolean;
   class?: string;
 }
 
-const { src, alt, ratio = "square", class: className } = Astro.props;
+const {
+  src,
+  alt,
+  variant = "card",
+  priority = false,
+  class: className = "",
+} = Astro.props;
 
+// 🎨 Dimensiones según contexto editorial
 let width = 800;
 let height = 800;
+let sizes = "(max-width: 768px) 100vw, 33vw";
 
-if (ratio === "landscape") {
-  width = 1600;
-  height = 900;
+switch (variant) {
+  case "hero":
+    width = 1600;
+    height = 900;
+    sizes = "100vw";
+    break;
+
+  case "agenda":
+    width = 1200;
+    height = 800;
+    sizes = "(max-width: 768px) 100vw, 50vw";
+    break;
+
+  case "portrait":
+    width = 800;
+    height = 1000;
+    sizes = "(max-width: 768px) 100vw, 25vw";
+    break;
+
+  case "card":
+  default:
+    width = 800;
+    height = 800;
+    sizes = "(max-width: 768px) 100vw, 33vw";
 }
 
-if (ratio === "portrait") {
-  width = 800;
-  height = 1000;
-}
+// 🚀 LCP control
+const loading = priority ? "eager" : "lazy";
+const fetchpriority = priority ? "high" : undefined;
+const decoding = priority ? "sync" : "async";
 
-/** Rutas locales (public/) con <img> para que siempre se vean; el resto con Image optimizado */
+// Rutas de public/ (empiezan por /) se sirven con <img>; astro:assets no las resuelve
 const isLocalPath = typeof src === "string" && src.startsWith("/");
 ---
-{
-  isLocalPath ? (
-    <img
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      loading="lazy"
-      class={className}
-    />
-  ) : (
-    <Image
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      sizes="(max-width: 768px) 100vw, 33vw"
-      loading="lazy"
-      class={className}
-    />
-  )
-}
+{isLocalPath ? (
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    decoding={decoding}
+    class={`transition-opacity duration-500 ease-out ${className}`}
+    style="display: block; width: 100%; height: 100%; object-fit: cover;"
+    fetchpriority={fetchpriority}
+  />
+) : (
+  <Image
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    sizes={sizes}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    decoding={decoding}
+    class={`transition-opacity duration-500 ease-out ${className}`}
+  />
+)}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <rect fill="#F6F0ED" width="400" height="400"/>
+  <!-- Icono: charla / presentación -->
+  <rect x="100" y="120" width="200" height="120" rx="8" fill="#fff" stroke="#F05A28" stroke-width="2" opacity="0.9"/>
+  <circle cx="160" cy="175" r="20" fill="#E5E5E5"/>
+  <rect x="200" y="155" width="80" height="12" rx="4" fill="#E5E5E5"/>
+  <rect x="200" y="175" width="60" height="12" rx="4" fill="#F05A28" opacity="0.5"/>
+  <rect x="200" y="195" width="70" height="12" rx="4" fill="#E5E5E5"/>
+  <!-- Ondas / micrófono -->
+  <path d="M120 260 Q140 240 160 260 Q180 280 160 300 Q140 320 120 300 Z" fill="#F05A28" opacity="0.3"/>
+  <text fill="#666" font-family="sans-serif" font-size="14" font-weight="500" text-anchor="middle" x="200" y="320">Actividades</text>
+  <text fill="#999" font-family="sans-serif" font-size="12" text-anchor="middle" x="200" y="340">Charlas · Talleres · Encuentros</text>
+</svg>

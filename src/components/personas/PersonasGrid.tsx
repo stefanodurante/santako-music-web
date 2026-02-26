@@ -229,11 +229,11 @@ export default function PersonasGrid({ personas }: Props) {
                 <img
                   src={image}
                   alt={person.data.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                 />
               )}
 
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition" />
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-500 ease-out" />
 
               <div className="relative h-full p-4 flex flex-col justify-end text-white">
                 <span className="text-xs uppercase tracking-widest opacity-80">

@@ -48,15 +48,19 @@ const getSize = (item: ContentNode, index: number): "small" | "medium" | "large"
         <Card size={getSize(item, index)}>
           <div class="group relative h-full overflow-hidden">
             {/* IMAGEN */}
-            <SmartImage
-              src={image}
-              alt={item.data.title}
-              ratio="square"
-              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
+            <div class="absolute inset-0 overflow-hidden">
+              <div class="aspect-square w-full overflow-hidden relative">
+                <SmartImage
+                  src={image}
+                  alt={item.data.title}
+                  variant="card"
+                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                />
+              </div>
+            </div>
 
             {/* OVERLAY */}
-            <div class="absolute inset-0 bg-black/40" />
+            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-500 ease-out" />
 
             {/* CONTENIDO */}
             <div class="relative h-full p-5 flex flex-col justify-end text-white">

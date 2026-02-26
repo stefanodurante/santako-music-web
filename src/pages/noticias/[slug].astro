@@ -44,11 +44,11 @@ const title = post ? decodeHtmlEntities(post.title.rendered) : "Noticia no encon
         </header>
 
         {post.featured_image_src && (
-          <div class="aspect-video overflow-hidden rounded-lg mb-12">
+          <div class="aspect-square overflow-hidden rounded-lg mb-12">
             <SmartImage
               src={post.featured_image_src}
               alt={title}
-              ratio="landscape"
+              variant="card"
               class="w-full h-full object-cover"
             />
           </div>

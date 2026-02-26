@@ -7,9 +7,11 @@ interface Props {
 const { class: className = "" } = Astro.props;
 ---
 
-<SmartImage
-  src="/logo/santako-music-logo.png"
-  alt="Santako Music"
-  ratio="square"
-  class={className}
-/>
+<div class={`aspect-square overflow-hidden ${className}`}>
+  <SmartImage
+    src="/logo/santako-music-logo.png"
+    alt="Santako Music"
+    variant="card"
+    class="w-full h-full object-contain"
+  />
+</div>
