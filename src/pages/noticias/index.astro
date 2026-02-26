@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SmartImage from "../../components/ui/SmartImage.astro";
 import { getPosts, decodeHtmlEntities, stripHtml } from "../../lib/wordpress";
 
 /**
@@ -19,44 +20,47 @@ const posts = await getPosts({ perPage: 12 });
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {posts.map((post) => (
-        <article class="group">
+        <article class="group block rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
           {post.featured_image_src && (
-            <div class="aspect-video overflow-hidden rounded-lg mb-4">
-              <img
+            <a href={`/noticias/${post.slug}`} class="block aspect-square overflow-hidden rounded-t-lg mb-0">
+              <SmartImage
                 src={post.featured_image_src}
                 alt={decodeHtmlEntities(post.title.rendered)}
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                variant="card"
+                class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
               />
-            </div>
+            </a>
           )}
 
-          <time class="text-xs uppercase tracking-widest opacity-50">
-            {new Date(post.date).toLocaleDateString("es-ES", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-          </time>
+          <div class="p-4 pt-4">
+            <time class="text-xs uppercase tracking-widest opacity-50">
+              {new Date(post.date).toLocaleDateString("es-ES", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </time>
 
-          <h2 class="font-heading text-2xl mt-2 mb-3">
-            <a 
+            <h2 class="font-heading text-2xl mt-2 mb-3">
+              <a 
+                href={`/noticias/${post.slug}`}
+                class="group-hover:opacity-70 transition duration-300"
+                set:html={post.title.rendered}
+              />
+            </h2>
+
+            <p class="opacity-70 line-clamp-3">
+              {stripHtml(post.excerpt.rendered)}
+            </p>
+
+            <a
               href={`/noticias/${post.slug}`}
-              class="hover:opacity-70 transition"
-              set:html={post.title.rendered}
-            />
-          </h2>
-
-          <p class="opacity-70 line-clamp-3">
-            {stripHtml(post.excerpt.rendered)}
-          </p>
-
-          <a
-            href={`/noticias/${post.slug}`}
-            class="inline-block mt-4 text-sm uppercase tracking-widest border-b pb-1 hover:opacity-70 transition"
-            style="border-color: var(--color-text);"
-          >
-            Leer más
-          </a>
+              class="inline-block mt-4 text-sm uppercase tracking-widest border-b pb-1 group-hover:opacity-70 transition duration-300"
+              style="border-color: var(--color-text);"
+            >
+              Leer más
+            </a>
+          </div>
         </article>
       ))}
     </div>

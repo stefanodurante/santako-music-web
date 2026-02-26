@@ -1,6 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
-  <rect fill="#E5E5E5" width="400" height="300"/>
-  <text fill="#999" font-family="sans-serif" font-size="16" text-anchor="middle" x="200" y="155">
-    Santako Music
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+  <rect fill="#FFE4DB" width="400" height="400"/>
+  <!-- Calendario simplificado -->
+  <rect x="120" y="100" width="160" height="140" rx="8" fill="#fff" stroke="#F05A28" stroke-width="2" opacity="0.9"/>
+  <rect x="120" y="100" width="160" height="32" rx="8" fill="#F05A28"/>
+  <rect x="120" y="132" width="160" height="8" fill="#F05A28"/>
+  <circle cx="160" cy="185" r="12" fill="#E5E5E5"/>
+  <circle cx="200" cy="185" r="12" fill="#F05A28" opacity="0.6"/>
+  <circle cx="240" cy="185" r="12" fill="#E5E5E5"/>
+  <line x1="140" y1="220" x2="260" y2="220" stroke="#ccc" stroke-width="1"/>
+  <line x1="140" y1="235" x2="220" y2="235" stroke="#ccc" stroke-width="1"/>
+  <text fill="#666" font-family="sans-serif" font-size="14" font-weight="500" text-anchor="middle" x="200" y="320">Agenda</text>
+  <text fill="#999" font-family="sans-serif" font-size="12" text-anchor="middle" x="200" y="340">Santako Music</text>
 </svg>

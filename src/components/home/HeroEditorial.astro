@@ -1,5 +1,6 @@
 ---
 import Logo from "../ui/LogoImage.astro";
+import SmartImage from "../ui/SmartImage.astro";
 import { content } from "../../data/mock/content";
 import type { ContentNode } from "../../types/content";
 
@@ -28,11 +29,11 @@ const heroImage =
 <section id="hero" class="section-hero relative min-h-[65vh] w-full overflow-hidden text-white">
   <!-- IMAGEN DE FONDO -->
   <div class="absolute inset-0 -z-10">
-    <img
+    <SmartImage
       src={heroImage}
       alt={heroEvent?.data.title || "Santako Music"}
-      class="w-full h-full object-cover"
-      loading="eager"
+      variant="hero"
+      priority
     />
     <div class="absolute inset-0 bg-black/55"></div>
   </div>

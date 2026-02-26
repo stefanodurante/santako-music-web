@@ -2,6 +2,8 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { content } from "../../data/mock/content";
 import Tag from "../../components/ui/Tag.astro";
+import SmartImage from "../../components/ui/SmartImage.astro";
+import placeholderActividades from "../../assets/placeholder-actividades.jpg";
 
 export function getStaticPaths() {
   const actividades = content.filter((item) => item.type === "ACTIVIDAD");
@@ -48,12 +50,12 @@ const { data } = actividad;
       </header>
 
       <!-- IMAGEN -->
-      <div class="aspect-video overflow-hidden rounded-lg mb-12 bg-neutral-100">
-        <img
-          src={data.images?.[0] || "/images/placeholder.svg"}
+      <div class="aspect-square min-h-[240px] overflow-hidden rounded-lg mb-12 bg-neutral-100">
+        <SmartImage
+          src={(data.images?.[0]?.trim()) || (typeof placeholderActividades === "string" ? placeholderActividades : placeholderActividades.src)}
           alt={data.title}
+          variant="card"
           class="w-full h-full object-cover"
-          loading="lazy"
         />
       </div>
 

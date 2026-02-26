@@ -1,9 +1,16 @@
 ---
+import SmartImage from "./SmartImage.astro";
+
 interface Props {
   class?: string;
 }
 const { class: className = "" } = Astro.props;
 ---
 
-<!-- src/components/ui/LogoImage.astro -->
-<img src="/logo/santako-music-logo.png" alt="Santako Music" class={className} />
+<div class={`flex justify-center px-6 ${className}`}>
+  <img
+    src="/logo/santako-music-logo.png"
+    alt="Santako Music"
+    class="w-full max-w-[420px] h-auto"
+  />
+</div>

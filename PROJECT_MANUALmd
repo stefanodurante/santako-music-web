@@ -169,6 +169,7 @@ Si no cumple al menos uno, se reconsidera.
 
 # 9. Próximas Evoluciones
 
+- [x] Filtros y búsqueda en Personas
 - Migración completa a WordPress CPT
 - Sistema de caché API
 - Optimización de imágenes
