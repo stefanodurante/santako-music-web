@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SmartImage from "../../components/ui/SmartImage.astro";
 import { getPosts, decodeHtmlEntities, stripHtml } from "../../lib/wordpress";
 
 /**
@@ -22,9 +23,10 @@ const posts = await getPosts({ perPage: 12 });
         <article class="group">
           {post.featured_image_src && (
             <div class="aspect-video overflow-hidden rounded-lg mb-4">
-              <img
+              <SmartImage
                 src={post.featured_image_src}
                 alt={decodeHtmlEntities(post.title.rendered)}
+                ratio="landscape"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </div>

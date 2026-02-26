@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import AgendaFilters from "../../../components/agenda/AgendaFilters.astro";
+import SmartImage from "../../../components/ui/SmartImage.astro";
 import { content } from "../../../data/mock/content";
 
 /**
@@ -77,6 +78,14 @@ const isPast = (date: string) => {
 // Navegación meses
 const prevMonth = currentMonthIndex > 0 ? months[currentMonthIndex - 1] : null;
 const nextMonth = currentMonthIndex < months.length - 1 ? months[currentMonthIndex + 1] : null;
+
+const getDayImage = (items: typeof agendaItems) => {
+  const withImages = items.filter(
+    (item) => "images" in item.data && item.data.images && item.data.images.length > 0
+  );
+  if (withImages.length > 0) return withImages[0].data.images![0];
+  return "/images/placeholder-agenda.jpg";
+};
 ---
 
 <BaseLayout title={`Agenda ${currentMonth.name} ${year} · Santako Music`}>
@@ -170,13 +179,25 @@ const nextMonth = currentMonthIndex < months.length - 1 ? months[currentMonthInd
                 }`}
             >
               {/* Número del día */}
-              <span class={`font-mono text-sm ${past ? "opacity-30" : "opacity-60"}`}>
+              <span class={`font-mono text-sm shrink-0 ${past ? "opacity-30" : "opacity-60"}`}>
                 {day}
               </span>
 
+              {/* Miniatura del día (imagen del primer evento o placeholder) */}
+              {hasEvents && (
+                <div class="flex-1 min-h-0 overflow-hidden rounded border border-black/10">
+                  <SmartImage
+                    src={getDayImage(dayEvents)}
+                    alt={dayEvents[0].data.title}
+                    ratio="square"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+
               {/* Eventos del día */}
               {hasEvents && (
-                <div class="flex flex-col gap-1 flex-1">
+                <div class="flex flex-col gap-1 shrink-0">
                   {dayEvents.slice(0, 2).map((item) => (
                     <a
                       href={item.type === "EVENTO" ? `/evento/${item.data.slug}` : `/actividad/${item.data.slug}`}

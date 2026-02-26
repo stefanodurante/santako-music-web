@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SmartImage from "../../components/ui/SmartImage.astro";
 import { getPosts, getPostBySlug, decodeHtmlEntities } from "../../lib/wordpress";
 
 /**
@@ -44,9 +45,10 @@ const title = post ? decodeHtmlEntities(post.title.rendered) : "Noticia no encon
 
         {post.featured_image_src && (
           <div class="aspect-video overflow-hidden rounded-lg mb-12">
-            <img
+            <SmartImage
               src={post.featured_image_src}
               alt={title}
+              ratio="landscape"
               class="w-full h-full object-cover"
             />
           </div>

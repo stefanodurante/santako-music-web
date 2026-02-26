@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SmartImage from "../../components/ui/SmartImage.astro";
 import { content } from "../../data/mock/content";
 
 // Filtrar podcasts por canal
@@ -45,11 +46,11 @@ const clandestinoPodcasts = allPodcasts
               class="group block bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition"
             >
               <div class="aspect-video bg-gray-100 overflow-hidden">
-                <img 
-                  src={podcast.data.images?.[0] || "/images/eventos/podcast-live-1.jpg"} 
+                <SmartImage
+                  src={podcast.data.images?.[0] || "/images/eventos/podcast-live-1.jpg"}
                   alt={podcast.data.title}
+                  ratio="landscape"
                   class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-                  loading="lazy"
                 />
               </div>
               <div class="p-4">
